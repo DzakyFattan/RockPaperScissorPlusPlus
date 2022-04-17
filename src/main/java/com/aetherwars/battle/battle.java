@@ -1,11 +1,12 @@
 package com.aetherwars.battle;
 
 import com.aetherwars.model.activeCard;
+
 public class battle {
     private ArrayList<activeCard> player1;
     private ArrayList<activeCard> player2;
 
-    public battle(ArrayList<CardOnHand> player1,  ArrayList<CardOnHand> player2) {
+    public battle() {
         this.player1 = new ArrayList<CardOnHand>();
         this.player2 = new ArrayList<CardOnHand>();
     }

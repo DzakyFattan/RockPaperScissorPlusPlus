@@ -1,6 +1,6 @@
 package com.aetherwars.battle;
 
-import com.aetherwars.model.CardOnHand;
+import com.aetherwars.slot.CardOnHand;
 
 public class activeCard {
     private int id;
