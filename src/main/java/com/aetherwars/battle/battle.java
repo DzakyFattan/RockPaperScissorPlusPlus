@@ -1,6 +1,6 @@
 package com.aetherwars.battle;
 
-import com.aetherwars.model.activeCard;
+import com.aetherwars.battle.activeCard;
 
 public class battle {
     private ArrayList<activeCard> player1;
