@@ -1,17 +1,21 @@
 package com.aetherwars.model;
 
 public abstract class Card {
+
     private String name;
     private String description;
+    private String image_path;
 
     public Card() {
         this.name = "Steve";
         this.description = "The OG player since the beginning of time";
+        this.image_path = "";
     }
 
-    public Card(String name, String description) {
+    public Card(String name, String description, String image_path) {
         this.name = name;
         this.description = description;
+        this.image_path = image_path;
     }
 
     // setters
@@ -23,6 +27,10 @@ public abstract class Card {
         this.description = description;
     }
 
+    public void setImagePath(String image_path) {
+        this.image_path = image_path;
+    }
+
     // getters
     public String getName() {
         return this.name;
@@ -31,4 +39,9 @@ public abstract class Card {
     public String getDescription() {
         return this.description;
     }
+
+    public String getImagePath() {
+        return this.image_path;
+    }
+
 }

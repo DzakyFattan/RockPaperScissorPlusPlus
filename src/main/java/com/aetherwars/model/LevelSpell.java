@@ -8,8 +8,8 @@ public class LevelSpell extends Spell {
 
     private LevelSpellType level_type;
 
-    public LevelSpell(String name, String description, int mana, LevelSpellType level_type) {
-        super(name, description, SpellType.LVL, mana, 0);
+    public LevelSpell(String name, String description, String image_path, int mana, LevelSpellType level_type) {
+        super(name, description, image_path, SpellType.LVL, mana, 0);
         this.level_type = level_type;
     }
 

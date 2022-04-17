@@ -4,8 +4,8 @@ public class MorphSpell extends Spell {
 
     int target;
 
-    public MorphSpell(String name, String description, int mana, int target) {
-        super(name, description, SpellType.MORPH, mana, 0);
+    public MorphSpell(String name, String description, String image_path, int mana, int target) {
+        super(name, description, image_path, SpellType.MORPH, mana, 0);
         this.target = target;
     }
 

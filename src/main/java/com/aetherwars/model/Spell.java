@@ -13,8 +13,8 @@ public class Spell extends Card{
         this.duration = 0;
     }
 
-    public Spell(String name, String description, SpellType type, int mana, int duration) {
-        super(name, description);
+    public Spell(String name, String description, String image_path, SpellType type, int mana, int duration) {
+        super(name, description, image_path);
         this.type = type;
         this.mana = mana;
         this.duration = duration;

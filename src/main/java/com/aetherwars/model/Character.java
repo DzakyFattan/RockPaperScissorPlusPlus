@@ -16,8 +16,8 @@ public class Character extends Card{
     this.healthUp = 1;
   }
 
-  public Character(String name, String description, CharacterType element, int attack, int health, int attackUp, int healthUp) {
-    super(name, description);
+  public Character(String name, String description, String image_path, CharacterType element, int attack, int health, int attackUp, int healthUp) {
+    super(name, description, image_path);
     this.type = element;
     this.attack = attack;
     this.health = health;
