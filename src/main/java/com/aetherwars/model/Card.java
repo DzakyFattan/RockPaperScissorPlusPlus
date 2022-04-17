@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-abstract class Card {
+public abstract class Card {
     private String name;
     private String description;
 
@@ -15,10 +15,20 @@ abstract class Card {
     }
 
     // setters
-    public void setName(String name){ this.name = name; }
-    public void setDescription(String description){ this.description = description; }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     // getters
-    public String getName(){ return this.name; }
-    public String getDescription(){ return this.description; }
+    public String getName() {
+        return this.name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
