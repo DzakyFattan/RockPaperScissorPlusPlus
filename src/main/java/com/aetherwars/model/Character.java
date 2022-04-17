@@ -45,6 +45,10 @@ public class Character extends Card{
   public void setHealthUp(int healthUp) {
     this.healthUp = healthUp;
   }
+  public void reduceHealth(int amount) {
+    this.health -= amount;
+    this.health = this.health < 0 ? 0 : this.health;
+  }
 
   // getters
   public CharacterType getType() {
