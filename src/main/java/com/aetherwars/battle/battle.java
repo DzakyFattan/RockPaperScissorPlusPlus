@@ -75,7 +75,17 @@ public class battle {
         }
         this.player2.get(index).setCard(card);
     }
-    
+    setAllCardPlayer1Active() {
+        for (int i = 0; i < this.player1.size(); i++) {
+            this.player1.get(i).setActive();
+        }
+    }
+    setAllCardPlayer2Active() {
+        for (int i = 0; i < this.player2.size(); i++) {
+            this.player2.get(i).setActive();
+        }
+    }
+
     public void characterAtk(int turn, int id1, int id2) {
         //karakter menyerang dengan turn=0 player1, turn=1 player2 dan pada id=1-5
         int index1=getIndexPlayer1(id1);
@@ -94,9 +104,12 @@ public class battle {
             this.player1.remove(id1);
         }
         else {
-            if (character2.getHealth()==0 && turn==0) {
-                card1.addExp(character1.getLevel());
-                card1.levelUp();
+            if (turn==0) {
+                this.player1.get(index1).setNonActive();
+                if (character2.getHealth()==0) {
+                    card1.addExp(character1.getLevel());
+                    card1.levelUp();
+                }
             }
             card1.setCharacter(character2);
             this.player1.setCard(id1, card1);
@@ -105,16 +118,18 @@ public class battle {
             this.player2.remove(id2);
         }
         else {
-            if (character1.getHealth()==0 && turn==1) {
-                card2.addExp(character2.getLevel());
-                card2.levelUp();
+            if (turn==1) {
+                this.player2.get(index2).setNonActive();
+                if (character1.getHealth()==0) {
+                    card2.addExp(character2.getLevel());
+                    card2.levelUp();
+                }
             }
             card2.setCharacter(character1);
             this.player2.setCard(id2, card2);
         }
     }
-        
-    }
+
     public double setAtkModifier(Character character1, Character character2) {
         //Set Attack Modifier; 1 jika tipe sama, 2 jika tipe lawan lebih lemah, 0.5 jika tipe lawan lebih kuat
         double atkModifier;
