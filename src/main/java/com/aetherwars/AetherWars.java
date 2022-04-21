@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -28,8 +32,10 @@ public class AetherWars extends Application {
     }
   }
 
+  Button btnStart;
+
   @Override
-  public void start(Stage stage) {
+  public void start(Stage primaryStage) {
     Text text = new Text();
     text.setText("Loading...");
     text.setX(50);
@@ -38,11 +44,22 @@ public class AetherWars extends Application {
     Group root = new Group();
     root.getChildren().add(text);
 
+    btnStart = new Button();
+    btnStart.setText("Moyai");
+
+    StackPane layout = new StackPane();
+    layout.getChildren().add(btnStart);
     Scene scene = new Scene(root, 1280, 720);
 
-    stage.setTitle("Minecraft: Aether Wars");
-    stage.setScene(scene);
-    stage.show();
+    primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icon.png"))));
+    primaryStage.setTitle("Minecraft: Aether Wars");
+
+    primaryStage.setMinWidth(960);
+    primaryStage.setMinHeight(540);
+    primaryStage.setMaxWidth(1920);
+    primaryStage.setMaxHeight(1080);
+    primaryStage.setScene(scene);
+    primaryStage.show();
 
     try {
       this.loadCards();
@@ -53,6 +70,6 @@ public class AetherWars extends Application {
   }
 
   public static void main(String[] args) {
-    launch();
+    launch(args);
   }
 }
