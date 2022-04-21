@@ -1,28 +1,36 @@
 package com.aetherwars.model;
 
+enum CharacterType {
+  OVERWORLD, NETHER, END
+};
+
 public class Character extends Card{
   private CharacterType type;
   private int attack;
   private int attackUp;
   private int health;
   private int healthUp;
+  private int mana;
 
   public Character() {
     super();
     this.type = CharacterType.OVERWORLD;
     this.attack = 1;
     this.health = 1;
+    this.mana = 1;
     this.attackUp = 1;
     this.healthUp = 1;
-  }
 
-  public Character(String name, String description, String image_path, CharacterType element, int attack, int health, int attackUp, int healthUp) {
-    super(name, description, image_path);
-    this.type = element;
-    this.attack = attack;
-    this.health = health;
-    this.attackUp = attackUp;
-    this.healthUp = healthUp;
+  }
+// row[1], row[3], row[2], Integer.parseInt(row[5]), Integer.parseInt(row[6]), Integer.parseInt(row[8]), Integer.parseInt(row[9])
+  public Character(String[] chara) {
+    super(chara[1], chara[3], chara[4]);
+    this.type = CharacterType.valueOf(chara[2]);
+    this.attack = Integer.parseInt(chara[5]);
+    this.health = Integer.parseInt(chara[6]);
+    this.mana = Integer.parseInt(chara[7]);
+    this.attackUp = Integer.parseInt(chara[8]);
+    this.healthUp = Integer.parseInt(chara[9]);
   }
 
   // setters
@@ -73,6 +81,6 @@ public class Character extends Card{
 
   @Override
   public String toString() {
-    return "Name: " + this.getName() + "\nDescription: " + this.getDescription() + "\nType: " + this.type;
+    return "Name: " + this.getName() + "\nDescription: " + this.getDescription() + "\nType: " + this.type + "\n";
   }
 }
