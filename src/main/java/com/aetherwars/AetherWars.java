@@ -38,8 +38,11 @@ public class AetherWars extends Application {
     text.setX(50);
     text.setY(50);
 
-    Parent root = FXMLLoader.load(getClass().getResource("/com/aetherwars/MainMenu.fxml"));
-    Scene mainMenuScene = new Scene(root);
+    Parent mainMenu = FXMLLoader.load(getClass().getResource("/com/aetherwars/MainMenu.fxml"));
+    String css = this.getClass().getResource("application.css").toExternalForm();
+
+    Scene mainMenuScene = new Scene(mainMenu);
+    mainMenuScene.getStylesheets().add(css);
 
     primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/aetherwars/icon.png"))));
     primaryStage.setTitle("Minecraft: Aether Wars");
