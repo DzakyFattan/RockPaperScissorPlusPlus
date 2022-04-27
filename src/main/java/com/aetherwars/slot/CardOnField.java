@@ -1,11 +1,14 @@
 package com.aetherwars.slot;
 
+import com.aetherwars.model.Character;
 import java.util.*;
 
 public class CardOnField {
     private Character character;
     private int level;
     private int exp;
+    private boolean isActive;
+
     private static HashMap<Integer, Integer> expReq = new HashMap<Integer, Integer>() {
         {
             for (int i = 1; i <= 10; i++) {
@@ -18,6 +21,7 @@ public class CardOnField {
         this.character = character;
         this.level = 1;
         this.exp = 0;
+        this.isActive = true;
     }
 
     // setters getters
@@ -55,5 +59,6 @@ public class CardOnField {
         }
         this.exp -= expReq.get(this.level);
         this.level++;
+        this.character.levelUp();
     }
 }

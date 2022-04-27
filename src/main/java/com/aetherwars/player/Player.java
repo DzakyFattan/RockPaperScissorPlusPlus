@@ -1,9 +1,6 @@
 package com.aetherwars.player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 import com.aetherwars.model.*;
 import com.aetherwars.model.Character;
@@ -16,7 +13,7 @@ public class Player {
     private int mana;
     private List<Card> deck;
     private List<Card> hand;
-    private List<CardOnField> field;
+    private Map<Integer, CardOnField> field;
 
     public Player(String name, List<Character> characters, List<Spell> spells) {
         this.name = name;
@@ -24,7 +21,7 @@ public class Player {
         this.mana = 1;
         this.deck = new ArrayList<Card>();
         this.hand = new ArrayList<Card>();
-        this.field = new ArrayList<CardOnField>();
+        this.field = new HashMap<Integer, CardOnField>();
         this.fillDeck(characters, spells);
     }
 
@@ -48,19 +45,23 @@ public class Player {
         return hand;
     }
 
+    public int getDeckCount() {
+        return this.deck.size();
+    };
+
     public void reduceHealth(int amount) {
         this.health -= amount;
-        this.health = this.health < 0 ? 0 : this.health;
+        this.health = Math.max(this.health, 0);
     }
 
-    public void increaseMana() {
-        this.mana += 1;
-        this.mana = this.mana > 10 ? 10 : this.mana;
+    public void updateMana(int turn) {
+        this.mana = turn;
+        this.mana = Math.min(this.mana, 10);
     }
 
     public void reduceMana(int amount) {
         this.mana -= amount;
-        this.mana = this.mana < 0 ? 0 : this.mana;
+        this.mana = Math.max(this.mana, 0);
     }
 
     public void addCardToHand(Card card) {

@@ -79,6 +79,11 @@ public class Character extends Card{
     return this.healthUp;
   }
 
+  public void levelUp() {
+    this.attack += this.attackUp;
+    this.health += this.healthUp;
+  }
+
   @Override
   public String toString() {
     return "Name: " + this.getName() + "\nDescription: " + this.getDescription() + "\nType: " + this.type + "\n";

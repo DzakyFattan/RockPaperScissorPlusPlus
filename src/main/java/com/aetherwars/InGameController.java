@@ -40,11 +40,21 @@ public class InGameController {
     private Rectangle attackPhaseIndicator;
     @FXML
     private Rectangle endPhaseIndicator;
+    @FXML
+    private Label deckCount;
+    @FXML
+    private Label playerManaCount;
+    @FXML
+    private Label manaCount;
+    @FXML
+    private Rectangle p1Frame;
+    @FXML
+    private Rectangle p2Frame;
 
     public InGameController() {
         Platform.runLater(() -> {
             board = new Board(characters, spells);
-            labelTurn.setText(Integer.toString(board.getTurnCounter()));
+            renderBoard();
         } );
     }
 
@@ -81,9 +91,25 @@ public class InGameController {
             board.nextPhase();
             endPhaseIndicator.setFill(Paint.valueOf("#eaeaea"));
             drawPhaseIndicator.setFill(Paint.valueOf("#ffa21f"));
-            labelTurn.setText(Integer.toString(board.getTurnCounter()));
         }
+        renderBoard();
     }
 
-
+    public void renderBoard() {
+        labelTurn.setText(Integer.toString(board.getTurnCounter()));
+        deckCount.setText(Integer.toString(board.getCurrentPlayerDeckCount()));
+        playerManaCount.setText(Integer.toString(board.getCurrentPlayerMana()));
+        manaCount.setText(Integer.toString(board.getManaCounter()));
+        if (board.getWhoseTurn().equals("P1")) {
+            p2Frame.setStroke(Paint.valueOf("#000000"));
+            p2Frame.setStrokeWidth(1);
+            p1Frame.setStroke(Paint.valueOf("#71e356"));
+            p1Frame.setStrokeWidth(5);
+        } else if (board.getWhoseTurn().equals("P2")) {
+            p1Frame.setStroke(Paint.valueOf("#000000"));
+            p1Frame.setStrokeWidth(1);
+            p2Frame.setStroke(Paint.valueOf("#71e356"));
+            p2Frame.setStrokeWidth(5);
+        }
+    }
 }
