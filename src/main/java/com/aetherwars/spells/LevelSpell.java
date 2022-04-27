@@ -28,4 +28,8 @@ public class LevelSpell extends Spell {
         return this.level_type;
     }
 
+    @Override
+    public String toSpecString() {
+        return "LVL UP";
+    }
 }

@@ -12,7 +12,6 @@ enum BattlePhase {
 
 public class Board {
     private BattlePhase Phase;
-
     private Player P1;
     private Player P2;
 
@@ -100,4 +99,34 @@ public class Board {
         else
             return P1.getDeckCount();
     }
+
+    public List<Card> getCurrentPlayerHand() {
+        if (whoseTurn.equals("P2"))
+            return P2.getHand();
+        else
+            return P1.getHand();
+    }
+
+    public List<Card> getCurrentPlayerTopDeck() {
+        if (whoseTurn.equals("P2"))
+            return P2.getTopCardsFromDeck();
+        else
+            return P1.getTopCardsFromDeck();
+    }
+
+    public void addToCurrentPlayerHand(Card card) {
+        if (whoseTurn.equals("P2"))
+            P2.addCardToHand(card);
+        else
+            P1.addCardToHand(card);
+    }
+
+    public void returnToCurrentPlayerDeck(List<Card> cards) {
+        if (whoseTurn.equals("P2"))
+            P2.returnCardsToDeck(cards);
+        else
+            P1.returnCardsToDeck(cards);
+    }
+    // Bagian Battle
+
 }

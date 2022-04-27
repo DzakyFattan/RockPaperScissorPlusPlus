@@ -23,6 +23,7 @@ public class Player {
         this.hand = new ArrayList<Card>();
         this.field = new HashMap<Integer, CardOnField>();
         this.fillDeck(characters, spells);
+        this.shuffleDeck();
     }
 
     public String getName() {
@@ -43,6 +44,10 @@ public class Player {
 
     public List<Card> getHand() {
         return hand;
+    }
+
+    public Map<Integer, CardOnField> getField() {
+        return field;
     }
 
     public int getDeckCount() {

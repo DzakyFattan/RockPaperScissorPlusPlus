@@ -36,4 +36,8 @@ public class PotionSpell extends Spell {
         return this.health_change;
     }
 
+    @Override
+    public String toSpecString() {
+        return "ATK" + (this.attack_change >= 0 ? "+" : "") + this.attack_change + "/HP" + (this.health_change >= 0 ? "+" : "") + this.health_change;
+    }
 }

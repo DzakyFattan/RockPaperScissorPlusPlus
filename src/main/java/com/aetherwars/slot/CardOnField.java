@@ -3,7 +3,7 @@ package com.aetherwars.slot;
 import com.aetherwars.model.Character;
 import java.util.*;
 
-public class CardOnField {
+public class CardOnField extends Character{
     private Character character;
     private int level;
     private int exp;
@@ -18,16 +18,16 @@ public class CardOnField {
     };
 
     public CardOnField(Character character) {
-        this.character = character;
+        super();
         this.level = 1;
         this.exp = 0;
         this.isActive = true;
     }
 
     // setters getters
-    public Character getCharacter() {
-        return character;
-    }
+//    public Character getCharacter() {
+//        return character;
+//    }
 
     public void setCharacter(Character character) {
         this.character = character;
@@ -59,6 +59,6 @@ public class CardOnField {
         }
         this.exp -= expReq.get(this.level);
         this.level++;
-        this.character.levelUp();
+        super.levelUp();
     }
 }

@@ -1,8 +1,5 @@
 package com.aetherwars.model;
 
-enum CharacterType {
-  OVERWORLD, NETHER, END
-};
 
 public class Character extends Card{
   private CharacterType type;
@@ -10,25 +7,22 @@ public class Character extends Card{
   private int attackUp;
   private int health;
   private int healthUp;
-  private int mana;
 
   public Character() {
     super();
     this.type = CharacterType.OVERWORLD;
     this.attack = 1;
     this.health = 1;
-    this.mana = 1;
     this.attackUp = 1;
     this.healthUp = 1;
 
   }
 // row[1], row[3], row[2], Integer.parseInt(row[5]), Integer.parseInt(row[6]), Integer.parseInt(row[8]), Integer.parseInt(row[9])
   public Character(String[] chara) {
-    super(chara[1], chara[3], chara[4]);
+    super(chara[1], chara[3], chara[4], Integer.parseInt(chara[7]));
     this.type = CharacterType.valueOf(chara[2]);
     this.attack = Integer.parseInt(chara[5]);
     this.health = Integer.parseInt(chara[6]);
-    this.mana = Integer.parseInt(chara[7]);
     this.attackUp = Integer.parseInt(chara[8]);
     this.healthUp = Integer.parseInt(chara[9]);
   }
@@ -55,7 +49,7 @@ public class Character extends Card{
   }
   public void reduceHealth(int amount) {
     this.health -= amount;
-    this.health = this.health < 0 ? 0 : this.health;
+    this.health = Math.max(this.health, 0);
   }
 
   // getters
@@ -84,6 +78,10 @@ public class Character extends Card{
     this.health += this.healthUp;
   }
 
+  @Override
+  public String toSpecString() {
+    return "ATK " + this.attack + "/HP " + this.health;
+  }
   @Override
   public String toString() {
     return "Name: " + this.getName() + "\nDescription: " + this.getDescription() + "\nType: " + this.type + "\n";

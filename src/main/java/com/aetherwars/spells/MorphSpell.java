@@ -24,4 +24,8 @@ public class MorphSpell extends Spell {
         return this.target;
     }
 
+    @Override
+    public String toSpecString() {
+        return "MORPH";
+    }
 }
