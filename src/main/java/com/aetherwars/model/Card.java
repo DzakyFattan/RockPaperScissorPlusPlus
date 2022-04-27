@@ -5,6 +5,7 @@ public abstract class Card {
     private String name;
     private String description;
     private String image_path;
+    private int manaCost;
 
     public Card() {
         this.name = "Steve";
@@ -12,10 +13,11 @@ public abstract class Card {
         this.image_path = "";
     }
 
-    public Card(String name, String description, String image_path) {
+    public Card(String name, String description, String image_path, int manaCost) {
         this.name = name;
         this.description = description;
         this.image_path = image_path;
+        this.manaCost = manaCost;
     }
 
     // setters
@@ -44,4 +46,9 @@ public abstract class Card {
         return this.image_path;
     }
 
+    public int getManaCost() {
+        return this.manaCost;
+    }
+
+    public abstract String toSpecString();
 }
