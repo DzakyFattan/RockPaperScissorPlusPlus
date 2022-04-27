@@ -1,20 +1,20 @@
 package com.aetherwars.slot;
+
 import java.util.*;
 
-public class CardOnHand{
+public class CardOnField {
     private Character character;
     private int level;
     private int exp;
-    private static HashMap<Integer, Integer> expReq = new HashMap<Integer, Integer>(){
+    private static HashMap<Integer, Integer> expReq = new HashMap<Integer, Integer>() {
         {
-            for(int i = 1; i <= 10; i++){
-                put(i, 2 * i -1);
+            for (int i = 1; i <= 10; i++) {
+                put(i, 2 * i - 1);
             }
         }
     };
 
-
-    public CardOnHand(Character character) {
+    public CardOnField(Character character) {
         this.character = character;
         this.level = 1;
         this.exp = 0;
@@ -45,12 +45,12 @@ public class CardOnHand{
         this.exp = exp;
     }
 
-    public void addExp(int exp){
+    public void addExp(int exp) {
         this.exp += exp;
     }
 
-    public void levelUp(){
-        if(this.exp < expReq.get(this.level)) {
+    public void levelUp() {
+        if (this.exp < expReq.get(this.level)) {
             return;
         }
         this.exp -= expReq.get(this.level);
