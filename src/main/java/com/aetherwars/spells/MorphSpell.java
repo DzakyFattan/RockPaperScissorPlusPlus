@@ -9,6 +9,11 @@ public class MorphSpell extends Spell {
         this.target = target;
     }
 
+    public MorphSpell(String[] data) {
+        super(data[1], data[2], data[3], SpellType.MORPH, Integer.parseInt(data[5]), 0);
+        this.target = Integer.parseInt(data[4]);
+    }
+
     // Setter
     public void setTarget(int target) {
         this.target = target;

@@ -6,4 +6,7 @@ public class SwapSpell extends Spell {
         super(name, description, image_path, SpellType.SWAP, mana, duration);
     }
 
+    public SwapSpell(String[] data) {
+        super(data[1], data[2], data[3], SpellType.SWAP, Integer.parseInt(data[5]), Integer.parseInt(data[4]));
+    }
 }

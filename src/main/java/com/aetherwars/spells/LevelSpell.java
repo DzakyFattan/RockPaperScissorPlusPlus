@@ -13,6 +13,11 @@ public class LevelSpell extends Spell {
         this.level_type = level_type;
     }
 
+    public LevelSpell(String[] data) {
+        super(data[1], data[2], data[3], SpellType.LVL, Integer.parseInt(data[5]), Integer.parseInt(data[6]));
+        this.level_type = LevelSpellType.valueOf(data[4]);
+    }
+
     // Setter
     public void setLevelType(LevelSpellType level_type) {
         this.level_type = level_type;

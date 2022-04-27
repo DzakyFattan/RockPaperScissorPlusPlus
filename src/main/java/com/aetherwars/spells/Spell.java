@@ -48,4 +48,8 @@ public class Spell extends Card {
         return this.type;
     }
 
+    @Override
+    public String toString() {
+        return  " Spell{name=" + this.getName() + ", duration=" + duration + ", mana=" + mana + ", type=" + type + '}';
+    }
 }

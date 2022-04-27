@@ -12,6 +12,12 @@ public class PotionSpell extends Spell {
         this.health_change = health_change;
     }
 
+    public PotionSpell(String[] data) {
+        super(data[1], data[2], data[3], SpellType.PTN, Integer.parseInt(data[6]), Integer.parseInt(data[7]));
+        this.attack_change = Integer.parseInt(data[4]);
+        this.health_change = Integer.parseInt(data[5]);
+    }
+
     // Setters
     public void setAttackChange(int attack_change) {
         this.attack_change = attack_change;
