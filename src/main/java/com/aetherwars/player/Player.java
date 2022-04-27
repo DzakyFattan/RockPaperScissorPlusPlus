@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Collections;
 import com.aetherwars.model.*;
 import com.aetherwars.model.Character;
+import com.aetherwars.spells.Spell;
 
 public class Player {
     private String name;

@@ -1,4 +1,4 @@
-package com.aetherwars.model;
+package com.aetherwars.spells;
 
 public class PotionSpell extends Spell {
 

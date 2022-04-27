@@ -1,6 +1,8 @@
-package com.aetherwars.model;
+package com.aetherwars.spells;
 
-public class Spell extends Card{
+import com.aetherwars.model.Card;
+
+public class Spell extends Card {
 
     private int duration;
     private int mana;

@@ -1,4 +1,4 @@
-package com.aetherwars.model;
+package com.aetherwars.spells;
 
 public enum SpellType {
     PTN, LVL, SWAP, MORPH

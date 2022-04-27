@@ -1,4 +1,4 @@
-package com.aetherwars.model;
+package com.aetherwars.spells;
 
 enum LevelSpellType {
     UP, DOWN
