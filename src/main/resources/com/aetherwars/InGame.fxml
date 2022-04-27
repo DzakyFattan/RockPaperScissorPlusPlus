@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.InGameController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
          <children>
@@ -58,14 +58,19 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="370.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                      </children>
                   </Pane>
+                  <Label fx:id="labelMid" alignment="CENTER" contentDisplay="CENTER" prefHeight="270.0" prefWidth="300.0" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font name="Montserrat Medium" size="24.0" />
+                     </font>
+                  </Label>
                   <Pane prefHeight="270.0" prefWidth="640.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="500.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="280.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="280.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="390.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="390.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="170.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="400.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="180.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="180.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="290.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="290.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="100.0" layoutX="70.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                      </children>
                   </Pane>
                </children>
@@ -96,7 +101,7 @@
                         <Font name="Montserrat Medium" size="16.0" />
                      </font>
                   </Text>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="1040.0" layoutY="10.0" stroke="BLACK" strokeWidth="4.0" width="60.0" />
+                  <Rectangle fx:id="boxNext" arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="1040.0" layoutY="10.0" stroke="BLACK" strokeWidth="4.0" width="60.0" />
                   <Text layoutX="1062.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt;">
                      <font>
                         <Font name="Montserrat Medium" size="16.0" />

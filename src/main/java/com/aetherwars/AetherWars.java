@@ -33,11 +33,6 @@ public class AetherWars extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    Text text = new Text();
-    text.setText("Loading...");
-    text.setX(50);
-    text.setY(50);
-
     Parent mainMenu = FXMLLoader.load(getClass().getResource("/com/aetherwars/MainMenu.fxml"));
     String css = this.getClass().getResource("application.css").toExternalForm();
 
@@ -56,9 +51,8 @@ public class AetherWars extends Application {
 
     try {
       this.loadCards();
-      text.setText("Minecraft: Aether Wars!");
     } catch (Exception e) {
-      text.setText("Failed to load cards: " + e);
+      System.out.println("Error!!\n");
     }
 
   }

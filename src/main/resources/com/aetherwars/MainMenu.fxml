@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.Controller">
+<AnchorPane fx:id="mainMenuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.MainMenuController">
     <children>
         <BorderPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -150,12 +150,12 @@
             <center>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToInGame" text="START GAME" textAlignment="CENTER">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#startGame" text="START GAME" textAlignment="CENTER">
                             <font>
                                 <Font name="Montserrat SemiBold" size="24.0" />
                             </font>
                         </Button>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#ExitGame" text="QUIT GAME" textAlignment="CENTER">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#exitGame" text="QUIT GAME" textAlignment="CENTER">
                             <font>
                                 <Font name="Montserrat SemiBold" size="24.0" />
                             </font>
