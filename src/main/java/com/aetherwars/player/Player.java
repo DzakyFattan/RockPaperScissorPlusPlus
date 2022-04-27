@@ -3,8 +3,11 @@ package com.aetherwars.player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.Random;
+
 import com.aetherwars.model.*;
 import com.aetherwars.model.Character;
+import com.aetherwars.slot.CardOnField;
 import com.aetherwars.spells.Spell;
 
 public class Player {
@@ -13,6 +16,7 @@ public class Player {
     private int mana;
     private List<Card> deck;
     private List<Card> hand;
+    private List<CardOnField> field;
 
     public Player(String name, List<Character> characters, List<Spell> spells) {
         this.name = name;
@@ -20,7 +24,8 @@ public class Player {
         this.mana = 1;
         this.deck = new ArrayList<Card>();
         this.hand = new ArrayList<Card>();
-        fillDeck(characters, spells);
+        this.field = new ArrayList<CardOnField>();
+        this.fillDeck(characters, spells);
     }
 
     public String getName() {
@@ -73,10 +78,11 @@ public class Player {
         int numSpells = 15;
         int numCards = numCharacters + numSpells;
         for (int i = 0; i < numCards; i++) {
+            Random ran = new Random();
             if (i < numCharacters) {
-                this.deck.add(characters.get((int) (Math.random() * characters.size())));
+                this.deck.add(characters.get(ran.nextInt(characters.size())));
             } else {
-                this.deck.add(spells.get((int) (Math.random() * spells.size())));
+                this.deck.add(spells.get(ran.nextInt(characters.size())));
             }
         }
     }

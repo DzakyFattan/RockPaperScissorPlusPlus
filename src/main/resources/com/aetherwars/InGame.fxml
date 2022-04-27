@@ -77,32 +77,26 @@
             </HBox>
             <Pane prefHeight="50.0" prefWidth="720.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="40.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
+                  <Rectangle fx:id="drawPhaseIndicator" arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="40.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
                   <Text layoutX="133.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DRAW">
                      <font>
                         <Font name="Montserrat Medium" size="16.0" />
                      </font>
                   </Text>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="280.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
+                  <Rectangle fx:id="planPhaseIndicator" arcHeight="5.0" arcWidth="5.0" fill="#eaeaea" height="30.0" layoutX="280.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
                   <Text layoutX="378.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAN">
                      <font>
                         <Font name="Montserrat Medium" size="16.0" />
                      </font>
                   </Text>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="520.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
+                  <Rectangle fx:id="attackPhaseIndicator" arcHeight="5.0" arcWidth="5.0" fill="#eaeaea" height="30.0" layoutX="520.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
                   <Text layoutX="607.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATTACK">
                      <font>
                         <Font name="Montserrat Medium" size="16.0" />
                      </font>
                   </Text>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="760.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
+                  <Rectangle fx:id="endPhaseIndicator" arcHeight="5.0" arcWidth="5.0" fill="#eaeaea" height="30.0" layoutX="760.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
                   <Text layoutX="862.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="END">
-                     <font>
-                        <Font name="Montserrat Medium" size="16.0" />
-                     </font>
-                  </Text>
-                  <Rectangle fx:id="boxNext" arcHeight="5.0" arcWidth="5.0" fill="#ffa21f" height="30.0" layoutX="1040.0" layoutY="10.0" stroke="BLACK" strokeWidth="4.0" width="60.0" />
-                  <Text layoutX="1062.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt;">
                      <font>
                         <Font name="Montserrat Medium" size="16.0" />
                      </font>
@@ -112,6 +106,7 @@
                         <Font name="Montserrat Medium" size="12.0" />
                      </font>
                   </Button>
+                  <Button layoutX="1016.0" layoutY="13.0" mnemonicParsing="false" onAction="#nextPhaseButtonClick" prefHeight="25.0" prefWidth="72.0" text="&gt;&gt;&gt;" />
                </children>
             </Pane>
             <HBox prefHeight="300.0" prefWidth="200.0">

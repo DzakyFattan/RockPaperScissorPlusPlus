@@ -1,8 +1,10 @@
 package com.aetherwars.model;
 
 import com.aetherwars.player.Player;
+import com.aetherwars.spells.Spell;
 
 import java.util.ArrayList;
+import java.util.List;
 
 enum BattlePhase {
     DRAW, PLAN, ATTACK, END
@@ -16,10 +18,10 @@ public class Board {
 
     private int TurnCounter;
 
-    public Board() {
+    public Board(List<Character> characters, List<Spell> spells) {
         Phase = BattlePhase.DRAW;
-        P1 = new Player("P1", new ArrayList<>(), new ArrayList<>());
-        P2 = new Player("P2", new ArrayList<>(), new ArrayList<>());
+        P1 = new Player("P1", characters, spells);
+        P2 = new Player("P2", characters, spells);
         TurnCounter = 1;
     }
 
@@ -42,7 +44,6 @@ public class Board {
                 Phase = BattlePhase.DRAW;
                 TurnCounter++;
         }
-        System.out.println("Next Phase: " + Phase);
     }
 
     public Player getP1() {
@@ -55,5 +56,9 @@ public class Board {
 
     public int getTurnCounter() {
         return TurnCounter;
+    }
+
+    public int addTurnCounter() {
+        return TurnCounter++;
     }
 }
