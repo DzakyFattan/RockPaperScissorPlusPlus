@@ -92,9 +92,13 @@ public class InGameController {
     }
 
     public void switchToMain(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/aetherwars/MainMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/MainMenu.fxml"));
+        Parent mainMenu = fxmlLoader.load();
+        MainMenuController controller = fxmlLoader.getController();
+        controller.setCharacters(characters);
+        controller.setSpells(spells);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(mainMenu);
         stage.setScene(scene);
         stage.show();
     }
@@ -116,7 +120,9 @@ public class InGameController {
             board.nextPhase();
             endPhaseIndicator.setFill(Paint.valueOf("#eaeaea"));
             drawPhaseIndicator.setFill(Paint.valueOf("#ffa21f"));
-            renderThreeCards();
+            if (board.getCurrentPlayerHand().size() < 5) {
+                renderThreeCards();
+            }
         }
         renderBoard();
     }
@@ -148,7 +154,12 @@ public class InGameController {
         hand5.getChildren().clear();
 
         for (int i = 0; i < board.getCurrentPlayerHand().size(); i++) {
-            ImageView img = new ImageView(String.valueOf(getClass().getResource(board.getCurrentPlayerHand().get(i).getImagePath())));
+            ImageView img = new ImageView(String.valueOf(getClass().getResource("card/image/error-icon.png")));
+            try {
+                img = new ImageView(String.valueOf(getClass().getResource(board.getCurrentPlayerHand().get(i).getImagePath())));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
             img.setFitHeight(82);
             img.setFitWidth(82);
             Label manaCost = new Label("MANA " + Integer.toString(board.getCurrentPlayerHand().get(i).getManaCost()));
@@ -194,7 +205,12 @@ public class InGameController {
         windowBox.setOpacity(0.2);
         threeCards = board.getCurrentPlayerTopDeck();
         for (int i = 0; i < 3; i++) {
-            ImageView img = new ImageView(String.valueOf(getClass().getResource(threeCards.get(i).getImagePath())));
+            ImageView img = new ImageView(String.valueOf(getClass().getResource("card/image/error-icon.png")));
+            try {
+                img = new ImageView(String.valueOf(getClass().getResource(threeCards.get(i).getImagePath())));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
             img.setFitHeight(180);
             img.setFitWidth(180);
             Label manaCost = new Label("MANA " + Integer.toString(threeCards.get(i).getManaCost()));
