@@ -8,6 +8,7 @@ public class CardOnField extends Character{
     private int level;
     private int exp;
     private List<PotionSpell> activePots;
+    private SwapEffect swapEffect;
 
     private static HashMap<Integer, Integer> expReq = new HashMap<Integer, Integer>() {
         {
@@ -22,6 +23,7 @@ public class CardOnField extends Character{
         this.level = 1;
         this.exp = 0;
         this.activePots = new ArrayList<PotionSpell>();
+        this.swapEffect = new SwapEffect(-1);           // -1 means no effect
     }
 
     public void applyPotionSpell(PotionSpell potion) {
@@ -41,6 +43,15 @@ public class CardOnField extends Character{
             }
         }
         this.exp = 0;
+    }
+
+    public void applySwapSpell(SwapSpell swapSpell) {
+        if(!swapEffect.isActive()){
+            SwapEffect newSwapEffect = new SwapEffect(swapSpell.getDuration());
+            this.swapEffect = newSwapEffect;
+        } else {
+            swapEffect.addDuration(swapSpell.getDuration());
+        }
     }
 
     // reduces the duration of all active potions, as in when a round has passed
@@ -67,6 +78,10 @@ public class CardOnField extends Character{
 
     @Override
     public int getAttack(){
+        return Math.min(super.getAttack() + this.getAttackBuff(), 0);
+    }
+
+    public int getAttackUnbounded(){
         return super.getAttack() + this.getAttackBuff();
     }
 
