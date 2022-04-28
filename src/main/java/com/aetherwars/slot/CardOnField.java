@@ -61,13 +61,17 @@ public class CardOnField extends Character{
         }
     }
 
+    public int getAttackBuff(){
+        int attackBuff = 0;
+        for (PotionSpell potion : activePots) {
+            attackBuff += potion.getAttackChange();
+        }
+        return attackBuff;
+    }
+
     @Override
     public int getAttack(){
-        int atkBuff = 0;
-        for (PotionSpell potion : activePots) {
-            atkBuff += potion.getAttackChange();
-        }
-        return super.getAttack() + atkBuff;
+        return super.getAttack() + this.getAttackBuff();
     }
 
     public int getHealthBuff(){
@@ -101,6 +105,14 @@ public class CardOnField extends Character{
         if(remainingAmount > 0){
             super.reduceHealth(remainingAmount);
         }
+    }
+
+    public List<PotionSpell> getActivePots(){
+        return activePots;
+    }
+
+    public void setActivePots(List<PotionSpell> newActivePots){
+        this.activePots = newActivePots;
     }
 
     public int getLevel() {
