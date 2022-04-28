@@ -53,6 +53,7 @@ public class Board {
                 Phase = BattlePhase.DRAW;
                 if (whoseTurn.equals("P2")) {
                     turnCounter++;
+                    tickAllSpells();
                 }
                 whoseTurn = (whoseTurn.equals("P1")) ? "P2" : "P1";
                 updateMana();
@@ -171,13 +172,8 @@ public class Board {
     // Bagian Battle
 
     // Bagian prep potion
-    public void applyMorphPotion(int targetPlayerIdx, int targetCardSlot, MorphSpell morphSpell){
-        if (targetPlayerIdx == 1) {
-            P1.addCardToField(targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget())));
-        }
-        else {
-            P2.addCardToField(targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget())));
-        }
+    public void applyMorphSpell(int targetCardSlot, MorphSpell morphSpell){
+        addToCurrentPlayerField(targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget() - 1)));
     }
 
     // Assumption: target 1 and 2 both does not have active swapEffect
@@ -196,6 +192,15 @@ public class Board {
             SwapEffect.swap(newTargetCardSlot1, newTargetCardSlot2);
             P2.addCardToField(targetCardSlot1, newTargetCardSlot1);
             P2.addCardToField(targetCardSlot2, newTargetCardSlot2);
+        }
+    }
+
+    public void tickAllSpells() {
+        for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P1").entrySet()) {
+            entry.getValue().tick();
+        }
+        for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P2").entrySet()) {
+            entry.getValue().tick();
         }
     }
 }

@@ -51,18 +51,10 @@ public class CardOnField extends Character{
         }
 
         // removes the potion if duration is below equals 0
-        for (PotionSpell potion : activePots) {
-            if(!potion.isActive()) {
-                activePots.remove(potion);
-            }
-        }
+        activePots.removeIf(potion -> !potion.isActive());
 
         // removes the potion if it has no effect
-        for (PotionSpell potion : activePots) {
-            if(potion.getHealthChange() == 0 && potion.getAttackChange() == 0) {
-                activePots.remove(potion);
-            }
-        }
+        activePots.removeIf(potion -> potion.getHealthChange() == 0 && potion.getAttackChange() == 0);
     }
 
     public int getAttackBuff(){

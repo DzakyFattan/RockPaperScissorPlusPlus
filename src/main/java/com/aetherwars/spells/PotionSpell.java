@@ -19,7 +19,7 @@ public class PotionSpell extends Spell {
     }
 
     public boolean isActive(){
-        return super.getDurationLeft() > 0 && super.getDuration() != 0;
+        return super.getDurationLeft() > 0 || super.getDuration() == 0;
     }
 
     // Setters

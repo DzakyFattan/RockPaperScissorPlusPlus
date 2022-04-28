@@ -4,6 +4,9 @@ package com.aetherwars;
 import com.aetherwars.model.Board;
 import com.aetherwars.model.Card;
 import com.aetherwars.slot.CardOnField;
+import com.aetherwars.spells.LevelSpell;
+import com.aetherwars.spells.MorphSpell;
+import com.aetherwars.spells.PotionSpell;
 import com.aetherwars.spells.Spell;
 import com.aetherwars.model.Character;
 import javafx.application.Platform;
@@ -349,7 +352,7 @@ public class InGameController {
             hoverCardType.setText("Type: " + ((Character) hoverHandCard).getType());
         } else {
             hoverCardAtk.setText((hoverHandCard.toSpecString()));
-            hoverCardHp.setText(" ");
+            hoverCardHp.setText("Duration: " + ((Spell) hoverHandCard).getDuration());
             hoverCardLvl.setText(" ");
             hoverCardExp.setText(" ");
             hoverCardType.setText("Type: " + ((Spell) hoverHandCard).getType());
@@ -496,6 +499,21 @@ public class InGameController {
                 board.addToCurrentPlayerField(index, cardOnField);
                 board.reduceCurrentPlayerMana(planHandCard.getManaCost());
                 board.removeFromCurrentPlayerHand(planHandCardIndex);
+            }
+
+            if (planHandCard.getCardType().equals("Spell")) {
+                if (board.getCurrentPlayerField().containsKey(index)) {
+                    CardOnField cardOnField = board.getCurrentPlayerField().get(index);
+                    if (planHandCard instanceof PotionSpell) {
+                        cardOnField.applyPotionSpell((PotionSpell) planHandCard);
+                    } else if (planHandCard instanceof LevelSpell) {
+                        cardOnField.applyLevelSpell((LevelSpell) planHandCard);
+                    } else if (planHandCard instanceof MorphSpell) {
+                        board.applyMorphSpell(index, (MorphSpell) planHandCard);
+                    } //TODO: add swap spell
+                    board.reduceCurrentPlayerMana(planHandCard.getManaCost());
+                    board.removeFromCurrentPlayerHand(planHandCardIndex);
+                }
             }
             resetHandBackgrounds();
             renderBoard();
