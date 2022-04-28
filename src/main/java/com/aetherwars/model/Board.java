@@ -176,25 +176,6 @@ public class Board {
         addToCurrentPlayerField(targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget() - 1)));
     }
 
-    // Assumption: target 1 and 2 both does not have active swapEffect
-    public void applySwapPotion(SwapSpell swapSpell, int targetCardSlot1, int targetCardSlot2){
-        SwapEffect newSE = new SwapEffect(swapSpell.getDuration(), targetCardSlot1, targetCardSlot2);
-        if (whoseTurn.equals("P1")) {
-            CardOnField newTargetCardSlot1 = P1.getField().get(targetCardSlot1);
-            CardOnField newTargetCardSlot2 = P1.getField().get(targetCardSlot2);
-            SwapEffect.swap(newTargetCardSlot1, newTargetCardSlot2);
-            P1.addCardToField(targetCardSlot1, newTargetCardSlot1);
-            P1.addCardToField(targetCardSlot2, newTargetCardSlot2);
-        }
-        else {
-            CardOnField newTargetCardSlot1 = P2.getField().get(targetCardSlot1);
-            CardOnField newTargetCardSlot2 = P2.getField().get(targetCardSlot2);
-            SwapEffect.swap(newTargetCardSlot1, newTargetCardSlot2);
-            P2.addCardToField(targetCardSlot1, newTargetCardSlot1);
-            P2.addCardToField(targetCardSlot2, newTargetCardSlot2);
-        }
-    }
-
     public void tickAllSpells() {
         for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P1").entrySet()) {
             entry.getValue().tick();
