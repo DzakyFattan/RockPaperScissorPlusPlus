@@ -24,17 +24,21 @@ public class CardOnField extends Character{
         this.activePots = new ArrayList<PotionSpell>();
     }
 
-    public void addPotionSpell(PotionSpell potion) {
+    public void applyPotionSpell(PotionSpell potion) {
         activePots.add(potion);
     }
 
-    public void addLevelSpell(LevelSpell levelSpell) {
+    public void applyLevelSpell(LevelSpell levelSpell) {
         if (levelSpell.getLevelType() == LevelSpellType.UP) {
-            this.level++;
-            super.levelUp();
+            if (level < 10) {
+                this.level++;
+                super.levelUp();
+            }
         }
         else {
-            this.level--;
+            if (this.level > 1) {
+                this.level--;
+            }
         }
         this.exp = 0;
     }
