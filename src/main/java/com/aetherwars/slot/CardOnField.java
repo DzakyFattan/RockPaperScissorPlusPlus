@@ -1,7 +1,7 @@
 package com.aetherwars.slot;
 
 import com.aetherwars.model.Character;
-import com.aetherwars.spells.PotionSpell;
+import com.aetherwars.spells.*;
 import java.util.*;
 
 public class CardOnField extends Character{
@@ -24,8 +24,19 @@ public class CardOnField extends Character{
         this.activePots = new ArrayList<PotionSpell>();
     }
 
-    public void addPotion(PotionSpell potion) {
+    public void addPotionSpell(PotionSpell potion) {
         activePots.add(potion);
+    }
+
+    public void addLevelSpell(LevelSpell levelSpell) {
+        if (levelSpell.getLevelType() == LevelSpellType.UP) {
+            this.level++;
+            super.levelUp();
+        }
+        else {
+            this.level--;
+        }
+        this.exp = 0;
     }
 
     // reduces the duration of all active potions, as in when a round has passed
@@ -109,7 +120,9 @@ public class CardOnField extends Character{
     }
 
     public void addExp(int exp) {
-        this.exp += exp;
+        if (this.level < 10){
+            this.exp += exp;
+        }
     }
 
     public int getCurrentExpReq() {
@@ -117,11 +130,10 @@ public class CardOnField extends Character{
     }
 
     public void levelUp() {
-        if (this.exp < expReq.get(this.level)) {
-            return;
+        while(this.exp >= expReq.get(this.level)) {
+            this.exp -= expReq.get(this.level);
+            this.level++;
+            super.levelUp();
         }
-        this.exp -= expReq.get(this.level);
-        this.level++;
-        super.levelUp();
     }
 }

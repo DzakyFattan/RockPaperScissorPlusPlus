@@ -1,14 +1,10 @@
 package com.aetherwars.spells;
 
-enum LevelSpellType {
-    UP, DOWN
-}
-
 public class LevelSpell extends Spell {
 
     private LevelSpellType level_type;
 
-    public LevelSpell(String name, String description, String image_path, int mana, LevelSpellType level_type) {
+    public LevelSpell(String name, String description, String image_path, int mana, LevelSpellType level_type, int level_change) {
         super(name, description, image_path, SpellType.LVL, mana, 0);
         this.level_type = level_type;
     }
@@ -28,8 +24,12 @@ public class LevelSpell extends Spell {
         return this.level_type;
     }
 
+    public static int getLvlSpellManaCost(int characterLevel){
+        return (int) Math.ceil(characterLevel/2);
+    }
+
     @Override
     public String toSpecString() {
-        return "LVL UP";
+        return "LVL " + this.level_type.toString();
     }
 }
