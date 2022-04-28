@@ -5,6 +5,7 @@ import com.aetherwars.model.Card;
 public abstract class Spell extends Card {
 
     private int duration;
+    private int durationLeft;
     private SpellType type;
 
     public Spell(){
@@ -17,6 +18,14 @@ public abstract class Spell extends Card {
         super(name, description, image_path, mana);
         this.type = type;
         this.duration = duration;
+        this.durationLeft = duration;
+    }
+
+    // Reduces the duration of the spell, as in for each round that has passed
+    public void tick(){
+        if(this.durationLeft > 0 && this.duration != 0){
+            durationLeft--;
+        }
     }
 
     // setters
@@ -31,6 +40,10 @@ public abstract class Spell extends Card {
     // getters
     public int getDuration() {
         return this.duration;
+    }
+
+    public int getDurationLeft() {
+        return this.durationLeft;
     }
 
     public SpellType getType() {

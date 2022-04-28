@@ -2,7 +2,7 @@ package com.aetherwars.model;
 
 import com.aetherwars.player.Player;
 import com.aetherwars.slot.CardOnField;
-import com.aetherwars.spells.Spell;
+import com.aetherwars.spells.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +17,21 @@ public class Board {
     private Player P1;
     private Player P2;
 
+    private List<SwapEffect> swapEffects;
+    private List<Character> characters;
     private int turnCounter;
     private String whoseTurn;
     private int manaCounter;
 
     public Board(List<Character> characters, List<Spell> spells) {
         Phase = BattlePhase.DRAW;
+        this.characters = characters;
         P1 = new Player("P1", characters, spells);
         P2 = new Player("P2", characters, spells);
         manaCounter = 1;
         turnCounter = 1;
         whoseTurn = "P1";
+        swapEffects = new ArrayList<SwapEffect>();
     }
 
     public String getPhase() {
@@ -166,4 +170,32 @@ public class Board {
     }
     // Bagian Battle
 
+    // Bagian prep potion
+    public void applyMorphPotion(int targetPlayerIdx, int targetCardSlot, MorphSpell morphSpell){
+        if (targetPlayerIdx == 1) {
+            P1.addCardToField(targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget())));
+        }
+        else {
+            P2.addCardToField(targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget())));
+        }
+    }
+
+    // Assumption: target 1 and 2 both does not have active swapEffect
+    public void applySwapPotion(SwapSpell swapSpell, int targetCardSlot1, int targetCardSlot2){
+        SwapEffect newSE = new SwapEffect(swapSpell.getDuration(), targetCardSlot1, targetCardSlot2);
+        if (whoseTurn.equals("P1")) {
+            CardOnField newTargetCardSlot1 = P1.getField().get(targetCardSlot1);
+            CardOnField newTargetCardSlot2 = P1.getField().get(targetCardSlot2);
+            SwapEffect.swap(newTargetCardSlot1, newTargetCardSlot2);
+            P1.addCardToField(targetCardSlot1, newTargetCardSlot1);
+            P1.addCardToField(targetCardSlot2, newTargetCardSlot2);
+        }
+        else {
+            CardOnField newTargetCardSlot1 = P2.getField().get(targetCardSlot1);
+            CardOnField newTargetCardSlot2 = P2.getField().get(targetCardSlot2);
+            SwapEffect.swap(newTargetCardSlot1, newTargetCardSlot2);
+            P2.addCardToField(targetCardSlot1, newTargetCardSlot1);
+            P2.addCardToField(targetCardSlot2, newTargetCardSlot2);
+        }
+    }
 }

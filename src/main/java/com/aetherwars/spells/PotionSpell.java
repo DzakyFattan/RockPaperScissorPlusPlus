@@ -18,7 +18,15 @@ public class PotionSpell extends Spell {
         this.health_change = Integer.parseInt(data[5]);
     }
 
+    public boolean isActive(){
+        return super.getDurationLeft() > 0 && super.getDuration() != 0;
+    }
+
     // Setters
+    public void reduceHealthChange(int attack_damage){
+        this.health_change -= attack_damage;
+    }
+
     public void setAttackChange(int attack_change) {
         this.attack_change = attack_change;
     }

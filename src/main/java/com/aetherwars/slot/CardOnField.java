@@ -1,12 +1,13 @@
 package com.aetherwars.slot;
 
 import com.aetherwars.model.Character;
+import com.aetherwars.spells.*;
 import java.util.*;
 
 public class CardOnField extends Character{
     private int level;
     private int exp;
-    private boolean isActive;
+    private List<PotionSpell> activePots;
 
     private static HashMap<Integer, Integer> expReq = new HashMap<Integer, Integer>() {
         {
@@ -20,7 +21,102 @@ public class CardOnField extends Character{
         super(character);
         this.level = 1;
         this.exp = 0;
-        this.isActive = true;
+        this.activePots = new ArrayList<PotionSpell>();
+    }
+
+    public void applyPotionSpell(PotionSpell potion) {
+        activePots.add(potion);
+    }
+
+    public void applyLevelSpell(LevelSpell levelSpell) {
+        if (levelSpell.getLevelType() == LevelSpellType.UP) {
+            if (level < 10) {
+                this.level++;
+                super.levelUp();
+            }
+        }
+        else {
+            if (this.level > 1) {
+                this.level--;
+            }
+        }
+        this.exp = 0;
+    }
+
+    // reduces the duration of all active potions, as in when a round has passed
+    public void tick() {
+        // ticks the potion
+        for (PotionSpell potion : activePots) {
+            potion.tick();
+        }
+
+        // removes the potion if duration is below equals 0
+        for (PotionSpell potion : activePots) {
+            if(!potion.isActive()) {
+                activePots.remove(potion);
+            }
+        }
+
+        // removes the potion if it has no effect
+        for (PotionSpell potion : activePots) {
+            if(potion.getHealthChange() == 0 && potion.getAttackChange() == 0) {
+                activePots.remove(potion);
+            }
+        }
+    }
+
+    public int getAttackBuff(){
+        int attackBuff = 0;
+        for (PotionSpell potion : activePots) {
+            attackBuff += potion.getAttackChange();
+        }
+        return attackBuff;
+    }
+
+    @Override
+    public int getAttack(){
+        return super.getAttack() + this.getAttackBuff();
+    }
+
+    public int getHealthBuff(){
+        int healthBuff = 0;
+        for (PotionSpell potion : activePots) {
+            healthBuff += potion.getHealthChange();
+        }
+        return healthBuff;
+    }
+
+    @Override
+    public int getHealth(){
+        return super.getHealth() + this.getHealthBuff();
+    }
+
+    @Override
+    public void reduceHealth(int amount){
+        int remainingAmount = amount;
+        // reduces health from potion buff first
+        if (this.getHealthBuff() != 0){
+            for(PotionSpell potion : activePots){
+                if (potion.getHealthChange() > 0 && remainingAmount > 0){
+                    int reducePotBuff = Math.min(potion.getHealthChange(), remainingAmount);
+                    potion.reduceHealthChange(reducePotBuff);
+                    remainingAmount -= reducePotBuff;
+                }
+            }
+        }
+
+        // reduces health from char card
+        if(remainingAmount > 0){
+            super.reduceHealth(remainingAmount);
+        }
+    }
+
+    public List<PotionSpell> getActivePots(){
+        return activePots;
+    }
+
+    public void setActivePots(List<PotionSpell> newActivePots){
+        this.activePots = newActivePots;
     }
 
     public int getLevel() {
@@ -40,7 +136,9 @@ public class CardOnField extends Character{
     }
 
     public void addExp(int exp) {
-        this.exp += exp;
+        if (this.level < 10){
+            this.exp += exp;
+        }
     }
 
     public int getCurrentExpReq() {
@@ -48,11 +146,10 @@ public class CardOnField extends Character{
     }
 
     public void levelUp() {
-        if (this.exp < expReq.get(this.level)) {
-            return;
+        while(this.exp >= expReq.get(this.level)) {
+            this.exp -= expReq.get(this.level);
+            this.level++;
+            super.levelUp();
         }
-        this.exp -= expReq.get(this.level);
-        this.level++;
-        super.levelUp();
     }
 }
