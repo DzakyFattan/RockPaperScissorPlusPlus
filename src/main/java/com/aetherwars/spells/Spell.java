@@ -19,6 +19,11 @@ public abstract class Spell extends Card {
         this.duration = duration;
     }
 
+    // Reduces the duration of the spell, as in for each round that has passed
+    public void tick(){
+        duration--;
+    }
+
     // setters
     public void setDuration(int duration) {
         this.duration = duration;

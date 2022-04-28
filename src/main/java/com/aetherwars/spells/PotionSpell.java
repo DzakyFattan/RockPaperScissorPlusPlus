@@ -19,6 +19,10 @@ public class PotionSpell extends Spell {
     }
 
     // Setters
+    public void reduceHealthChange(int attack_damage){
+        this.health_change -= attack_damage;
+    }
+
     public void setAttackChange(int attack_change) {
         this.attack_change = attack_change;
     }
