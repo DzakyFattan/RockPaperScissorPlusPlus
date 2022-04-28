@@ -32,12 +32,8 @@ import java.util.List;
 import java.util.Map;
 
 public class InGameController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     private List<Character> characters;
     private List<Spell> spells;
-    private List<Card> threeCards;
     private Board board;
     private boolean isPlanning;
     private Card planHandCard;
@@ -62,7 +58,6 @@ public class InGameController {
     @FXML private VBox hand4;
     @FXML private VBox hand5;
     @FXML private VBox windowBox;
-    @FXML private HBox threeCardsView;
     @FXML private ImageView hoverCardImage;
     @FXML private Label hoverCardName;
     @FXML private Label hoverCardDescription;
@@ -76,12 +71,22 @@ public class InGameController {
     @FXML private Button addExpButton;
     @FXML private Button deleteButton;
 
+    @FXML private ThreeCardsController threeCardsController;
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
     public InGameController() {
         Platform.runLater(() -> {
             board = new Board(characters, spells);
-            renderBoard();
-            initRender();
-            renderThreeCards();
+            try {
+                renderBoard();
+                initRender();
+                renderThreeCards();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
         } );
     }
 
@@ -99,8 +104,8 @@ public class InGameController {
         MainMenuController controller = fxmlLoader.getController();
         controller.setCharacters(characters);
         controller.setSpells(spells);
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(mainMenu);
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(mainMenu);
         stage.setScene(scene);
         stage.show();
     }
@@ -146,7 +151,11 @@ public class InGameController {
             endPhaseIndicator.setFill(Paint.valueOf("#eaeaea"));
             drawPhaseIndicator.setFill(Paint.valueOf("#ffa21f"));
             if (board.getCurrentPlayerHand().size() < 5) {
-                renderThreeCards();
+                try {
+                    renderThreeCards();
+                } catch (IOException exception) {
+                    System.out.println(exception);
+                }
             }
         }
         renderBoard();
@@ -190,7 +199,7 @@ public class InGameController {
             }
             img.setFitHeight(82);
             img.setFitWidth(82);
-            Label manaCost = new Label("MANA " + Integer.toString(board.getCurrentPlayerHand().get(i).getManaCost()));
+            Label manaCost = new Label("MANA " + board.getCurrentPlayerHand().get(i).getManaCost());
             manaCost.setFont(new Font("System", 13));
             manaCost.setStyle("-fx-font-weight: bold");
             manaCost.setTextAlignment(TextAlignment.CENTER);
@@ -235,10 +244,10 @@ public class InGameController {
         }
     }
 
-    public void renderCardOnField (Pane pane, CardOnField card) {;
+    public void renderCardOnField (Pane pane, CardOnField card) {
         ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource("/com/aetherwars/card/image/error-icon.png"))));
         try {
-            ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf("/com/aetherwars/" + getClass().getResource(card.getImagePath()))));
+            ((ImageView)pane.getChildren().get(2)).setImage(new Image("/com/aetherwars/" + getClass().getResource(card.getImagePath())));
         } catch (Exception e) {
             System.out.println("Error loading image");
         }
@@ -259,65 +268,32 @@ public class InGameController {
         }
     }
 
-    public void renderThreeCards() {
-        threeCardsView.setVisible(true);
+    public void renderThreeCards() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/aetherwars/fxml/ThreeCards.fxml"));
+        Parent root = loader.load();
+        threeCardsController = loader.getController();
+
         windowBox.setOpacity(0.2);
-        threeCards = board.getCurrentPlayerTopDeck();
-        for (int i = 0; i < 3; i++) {
-            ImageView img = new ImageView(String.valueOf(getClass().getResource("/com/aetherwars/card/image/error-icon.png")));
-            try {
-                img = new ImageView(String.valueOf(getClass().getResource("/com/aetherwars/" + threeCards.get(i).getImagePath())));
-            } catch (Exception e) {
-                System.out.println("Error loading image");
-            }
-            img.setFitHeight(180);
-            img.setFitWidth(180);
-            Label manaCost = new Label("MANA " + Integer.toString(threeCards.get(i).getManaCost()));
-            manaCost.setFont(new Font("System", 24));
-            manaCost.setStyle("-fx-font-weight: bold");
-            manaCost.setTextAlignment(TextAlignment.CENTER);
-            manaCost.setPadding(new Insets(20, 0, 20, 0));
-            Label spec = new Label(threeCards.get(i).toSpecString());
-            spec.setFont(new Font("System", 24));
-            spec.setStyle("-fx-font-weight: bold");
-            spec.setTextAlignment(TextAlignment.CENTER);
-
-            VBox choice = (VBox) threeCardsView.getChildren().get(i);
-            choice.getChildren().add(img);
-            choice.getChildren().add(manaCost);
-            choice.getChildren().add(spec);
-            choice.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-            choice.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        try {
+            threeCardsController.render(board);
+        } catch (NullPointerException e) {
+            System.out.println(e);
         }
-    }
-
-    public void chooseThreeCards(Event e) {
-        VBox choice = (VBox) e.getSource();
-        int index = threeCardsView.getChildren().indexOf(choice);
-        board.addToCurrentPlayerHand(threeCards.remove(index));
-        board.returnToCurrentPlayerDeck(threeCards);
-        for (Node child : threeCardsView.getChildren()) {
-            ((VBox) child).getChildren().clear();
-        }
-        threeCardsView.setVisible(false);
-        windowBox.setOpacity(1);
-        renderBoard();
     }
 
     private int getHandCardIndex(VBox handCard) {
-        int index = 0;
         if (handCard.equals(hand1)) {
-            index = 0;
+            return 0;
         } else if (handCard.equals(hand2)) {
-            index = 1;
+            return 1;
         } else if (handCard.equals(hand3)) {
-            index = 2;
+            return 2;
         } else if (handCard.equals(hand4)) {
-            index = 3;
+            return 3;
         } else if (handCard.equals(hand5)) {
-            index = 4;
+            return 4;
         }
-        return index;
+        return -1;
     }
 
     private int getFieldCardIndex(Pane fieldCard) {
@@ -334,7 +310,7 @@ public class InGameController {
         } catch (Exception e1) {
             return;
         }
-        hoverCardImage.setImage(new Image(String.valueOf(getClass().getResource(hoverHandCard.getImagePath()))));
+        hoverCardImage.setImage(new Image(String.valueOf(getClass().getResource("/com/aetherwars/" + hoverHandCard.getImagePath()))));
         hoverCardName.setText(hoverHandCard.getName());
         hoverCardDescription.setText(hoverHandCard.getDescription());
         if (hoverHandCard.getCardType().equals("Character")) {
@@ -366,7 +342,7 @@ public class InGameController {
         } else {
             return;
         }
-        hoverCardImage.setImage(new Image(String.valueOf(getClass().getResource(hoverFieldCard.getImagePath()))));
+        hoverCardImage.setImage(new Image(String.valueOf(getClass().getResource("/com/aetherwars/" + hoverFieldCard.getImagePath()))));
         hoverCardName.setText(hoverFieldCard.getName());
         hoverCardDescription.setText(hoverFieldCard.getDescription());
         hoverCardAtk.setText("ATK: " + hoverFieldCard.getAttack());
