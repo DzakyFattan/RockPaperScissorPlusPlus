@@ -1,4 +1,4 @@
-package com.aetherwars;
+package com.aetherwars.controller;
 
 
 import com.aetherwars.model.Board;
@@ -11,9 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,10 +28,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class InGameController {
     private Stage stage;
@@ -98,7 +94,7 @@ public class InGameController {
     }
 
     public void switchToMain(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/MainMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/fxml/MainMenu.fxml"));
         Parent mainMenu = fxmlLoader.load();
         MainMenuController controller = fxmlLoader.getController();
         controller.setCharacters(characters);
@@ -186,9 +182,9 @@ public class InGameController {
         hand5.getChildren().clear();
 
         for (int i = 0; i < board.getCurrentPlayerHand().size(); i++) {
-            ImageView img = new ImageView(String.valueOf(getClass().getResource("card/image/error-icon.png")));
+            ImageView img = new ImageView(String.valueOf(getClass().getResource("/com/aetherwars/card/image/error-icon.png")));
             try {
-                img = new ImageView(String.valueOf(getClass().getResource(board.getCurrentPlayerHand().get(i).getImagePath())));
+                img = new ImageView(String.valueOf(getClass().getResource("/com/aetherwars/" + board.getCurrentPlayerHand().get(i).getImagePath())));
             } catch (Exception e) {
                 System.out.println("Error loading image");
             }
@@ -240,9 +236,9 @@ public class InGameController {
     }
 
     public void renderCardOnField (Pane pane, CardOnField card) {;
-        ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource("card/image/error-icon.png"))));
+        ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource("/com/aetherwars/card/image/error-icon.png"))));
         try {
-            ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource(card.getImagePath()))));
+            ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf("/com/aetherwars/" + getClass().getResource(card.getImagePath()))));
         } catch (Exception e) {
             System.out.println("Error loading image");
         }
@@ -268,9 +264,9 @@ public class InGameController {
         windowBox.setOpacity(0.2);
         threeCards = board.getCurrentPlayerTopDeck();
         for (int i = 0; i < 3; i++) {
-            ImageView img = new ImageView(String.valueOf(getClass().getResource("card/image/error-icon.png")));
+            ImageView img = new ImageView(String.valueOf(getClass().getResource("/com/aetherwars/card/image/error-icon.png")));
             try {
-                img = new ImageView(String.valueOf(getClass().getResource(threeCards.get(i).getImagePath())));
+                img = new ImageView(String.valueOf(getClass().getResource("/com/aetherwars/" + threeCards.get(i).getImagePath())));
             } catch (Exception e) {
                 System.out.println("Error loading image");
             }

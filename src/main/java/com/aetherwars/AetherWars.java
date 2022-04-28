@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import com.aetherwars.controller.MainMenuController;
 import com.aetherwars.spells.MorphSpell;
 import com.aetherwars.spells.PotionSpell;
 import com.aetherwars.spells.Spell;
@@ -17,10 +18,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import com.aetherwars.model.Character;
 import com.aetherwars.util.CSVReader;
 
 public class AetherWars extends Application {
@@ -82,7 +81,7 @@ public class AetherWars extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/MainMenu.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/fxml/MainMenu.fxml"));
     Parent mainMenu = fxmlLoader.load();
     String css = this.getClass().getResource("application.css").toExternalForm();
 

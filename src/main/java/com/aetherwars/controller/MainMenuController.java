@@ -1,4 +1,4 @@
-package com.aetherwars;
+package com.aetherwars.controller;
 
 import com.aetherwars.spells.Spell;
 import com.aetherwars.model.Character;
@@ -29,7 +29,7 @@ public class MainMenuController {
     Stage fxmlstage;
 
     public void startGame(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/InGame.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/fxml/InGame.fxml"));
         Parent root = fxmlLoader.load();
         InGameController controller = fxmlLoader.getController();
         controller.setCharacters(characters);

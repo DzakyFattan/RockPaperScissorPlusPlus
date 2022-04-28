@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.InGameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.InGameController">
    <children>
       <VBox fx:id="windowBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
          <children>
@@ -55,7 +55,7 @@
                         <Rectangle fx:id="p1Frame" arcHeight="5.0" arcWidth="5.0" fill="#7dc0ff" height="100.0" layoutX="40.0" layoutY="86.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                         <ImageView fitHeight="85.0" fitWidth="94.0" layoutX="48.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@steve.png" />
+                              <Image url="@../steve.png" />
                            </image>
                         </ImageView>
                         <Pane layoutX="149.0" layoutY="28.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
@@ -64,7 +64,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -77,7 +77,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -90,7 +90,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="50.0" text="ATK:1" />
@@ -103,7 +103,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -116,7 +116,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -135,7 +135,7 @@
                         <Rectangle fx:id="p2Frame" arcHeight="5.0" arcWidth="5.0" fill="#ff8383" height="100.0" layoutX="400.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                         <ImageView fitHeight="85.0" fitWidth="100.0" layoutX="408.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@alex.jpg" />
+                              <Image url="@../alex.jpg" />
                            </image>
                         </ImageView>
                         <Pane layoutX="290.0" layoutY="28.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
@@ -144,7 +144,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -157,7 +157,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -170,7 +170,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -183,7 +183,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -196,7 +196,7 @@
                               <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@card/image/character/Sheep.png" />
+                                    <Image url="@../card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
@@ -282,7 +282,7 @@
                      <children>
                         <ImageView fx:id="hoverCardImage" fitHeight="200.0" fitWidth="205.0" layoutX="-7.0" layoutY="31.0" pickOnBounds="true">
                            <image>
-                              <Image url="@icon.png" />
+                              <Image url="@../icon.png" />
                            </image>
                         </ImageView>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="204.0" layoutX="-7.0" layoutY="28.0" stroke="BLACK" strokeWidth="4.0" width="209.0" />
