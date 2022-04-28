@@ -34,6 +34,7 @@ public class ThreeCardsController {
             } catch (Exception e) {
                 System.out.println("Error loading image");
             }
+            System.out.print("lesgo" + i + "\n");
             img.setFitHeight(180);
             img.setFitWidth(180);
             Label manaCost = new Label("MANA " + threeCardsList.get(i).getManaCost());
@@ -45,13 +46,15 @@ public class ThreeCardsController {
             spec.setFont(new Font("System", 24));
             spec.setStyle("-fx-font-weight: bold");
             spec.setTextAlignment(TextAlignment.CENTER);
-
+            System.out.print("lesgo" + i + "2\n");
             VBox choice = (VBox) threeCards.getChildren().get(i);
+            System.out.print(choice);
             choice.getChildren().add(img);
             choice.getChildren().add(manaCost);
             choice.getChildren().add(spec);
             choice.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
             choice.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+            System.out.print("lesgo" + i + "3\n");
         }
     }
 

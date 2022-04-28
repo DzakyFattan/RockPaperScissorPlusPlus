@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="threeCardsView" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.ThreeCardsController">
-    <HBox fx:id="threeCards" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" visible="true" AnchorPane.bottomAnchor="0.0">
-        <padding>
-            <Insets bottom="180.0" left="280.0" right="280.0" top="180.0" />
-        </padding>
-        <children>
-            <VBox alignment="TOP_CENTER" layoutX="555.0" layoutY="210.0" onMouseClicked="#chooseThreeCards" prefHeight="320.0" prefWidth="205.0">
-                <padding>
-                    <Insets top="10.0" />
-                </padding>
-            </VBox>
-            <VBox alignment="TOP_CENTER" layoutX="548.0" layoutY="190.0" onMouseClicked="#chooseThreeCards" prefHeight="320.0" prefWidth="205.0">
-                <padding>
-                    <Insets top="10.0" />
-                </padding>
-            </VBox>
-            <VBox alignment="TOP_CENTER" layoutX="650.0" layoutY="190.0" onMouseClicked="#chooseThreeCards" prefHeight="320.0" prefWidth="205.0">
-                <padding>
-                    <Insets top="10.0" />
-                </padding>
-            </VBox>
-        </children>
-    </HBox>
-</AnchorPane>
+<HBox fx:id="threeCards" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" visible="true" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.ThreeCardsController">
+    <padding>
+        <Insets bottom="180.0" left="280.0" right="280.0" top="180.0" />
+    </padding>
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="555.0" layoutY="210.0" onMouseClicked="#chooseThreeCards" prefHeight="320.0" prefWidth="205.0">
+            <padding>
+                <Insets top="10.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="TOP_CENTER" layoutX="548.0" layoutY="190.0" onMouseClicked="#chooseThreeCards" prefHeight="320.0" prefWidth="205.0">
+            <padding>
+                <Insets top="10.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="TOP_CENTER" layoutX="650.0" layoutY="190.0" onMouseClicked="#chooseThreeCards" prefHeight="320.0" prefWidth="205.0">
+            <padding>
+                <Insets top="10.0" />
+            </padding>
+        </VBox>
+    </children>
+</HBox>
