@@ -51,4 +51,6 @@ public abstract class Card {
     }
 
     public abstract String toSpecString();
+
+    public abstract String getCardType();
 }

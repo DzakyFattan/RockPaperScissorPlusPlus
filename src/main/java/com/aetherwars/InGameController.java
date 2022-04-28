@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -39,6 +40,8 @@ public class InGameController {
     private List<Spell> spells;
     List<Card> threeCards;
     private Board board;
+    private boolean isPlanning;
+    private Card planHandCard;
 
     @FXML
     private Label labelTurn;
@@ -74,11 +77,28 @@ public class InGameController {
     private VBox windowBox;
     @FXML
     private HBox threeCardsView;
+    @FXML
+    private ImageView hoverCardImage;
+    @FXML
+    private Label hoverCardName;
+    @FXML
+    private Label hoverCardDescription;
+    @FXML
+    private Label hoverCardAtk;
+    @FXML
+    private Label hoverCardHp;
+    @FXML
+    private Label hoverCardLvl;
+    @FXML
+    private Label hoverCardExp;
+    @FXML
+    private Label hoverCardType;
 
     public InGameController() {
         Platform.runLater(() -> {
             board = new Board(characters, spells);
             renderBoard();
+            initRender();
             renderThreeCards();
         } );
     }
@@ -101,6 +121,16 @@ public class InGameController {
         scene = new Scene(mainMenu);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void initRender() {
+        hoverCardName.setText(" ");
+        hoverCardDescription.setText(" ");
+        hoverCardAtk.setText(" ");
+        hoverCardHp.setText(" ");
+        hoverCardLvl.setText(" ");
+        hoverCardExp.setText(" ");
+        hoverCardType.setText(" ");
     }
 
     public void nextPhaseButtonClick(ActionEvent e) {
@@ -243,5 +273,75 @@ public class InGameController {
         threeCardsView.setVisible(false);
         windowBox.setOpacity(1);
         renderBoard();
+    }
+
+    private int getHandCardIndex(VBox handCard) {
+        int index = 0;
+        if (handCard.equals(hand1)) {
+            index = 0;
+        } else if (handCard.equals(hand2)) {
+            index = 1;
+        } else if (handCard.equals(hand3)) {
+            index = 2;
+        } else if (handCard.equals(hand4)) {
+            index = 3;
+        } else if (handCard.equals(hand5)) {
+            index = 4;
+        }
+
+        return index;
+    }
+
+    public void renderHoveredCardHand(Event e) {
+        VBox handCardBox = (VBox) e.getSource();
+        handCardBox.setOpacity(0.6);
+        int index = getHandCardIndex(handCardBox);
+        try {
+            planHandCard = board.getCurrentPlayerHand().get(index);
+        } catch (Exception e1) {
+            return;
+        }
+        hoverCardImage.setImage(new Image(String.valueOf(getClass().getResource(planHandCard.getImagePath()))));
+        hoverCardName.setText(planHandCard.getName());
+        hoverCardDescription.setText(planHandCard.getDescription());
+        if (planHandCard.getCardType().equals("Character")) {
+            hoverCardAtk.setText("ATK: " + ((Character) planHandCard).getAttack());
+            hoverCardHp.setText("HP: " + ((Character) planHandCard).getHealth());
+            hoverCardLvl.setText(" ");
+            hoverCardExp.setText(" ");
+            hoverCardType.setText("Type: " + ((Character)planHandCard).getType());
+        } else {
+            hoverCardAtk.setText((planHandCard.toSpecString()));
+            hoverCardHp.setText(" ");
+            hoverCardLvl.setText(" ");
+            hoverCardExp.setText(" ");
+            hoverCardType.setText("Type: " + ((Spell)planHandCard).getType());
+        }
+    }
+
+    public void unrenderHoveredCard(Event e) {
+        VBox handCardBox = (VBox) e.getSource();
+        handCardBox.setOpacity(1);;
+        hoverCardImage.setImage(null);
+        hoverCardName.setText("");
+        hoverCardDescription.setText("");
+        hoverCardAtk.setText("");
+        hoverCardHp.setText("");
+        hoverCardLvl.setText("");
+        hoverCardExp.setText("");
+        hoverCardType.setText("");
+    }
+
+    public void handlePlanning(Event e) {
+        if (board.getPhase().equals("PLAN")) {
+            VBox handCardBox = (VBox) e.getSource();
+            int index = getHandCardIndex(handCardBox);
+            try {
+                planHandCard = board.getCurrentPlayerHand().get(index);
+            } catch (Exception e1) {
+                return;
+            }
+
+        }
     }
 }

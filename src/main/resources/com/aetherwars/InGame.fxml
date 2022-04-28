@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -116,27 +118,27 @@
                         <Insets bottom="50.0" left="40.0" right="40.0" top="50.0" />
                      </HBox.margin>
                      <children>
-                        <VBox fx:id="hand1" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="hand1" alignment="TOP_CENTER" onMouseClicked="#handlePlanning" onMouseEntered="#renderHoveredCardHand" onMouseExited="#unrenderHoveredCard" prefHeight="200.0" prefWidth="100.0">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="hand2" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="hand2" alignment="TOP_CENTER" onMouseClicked="#handlePlanning" onMouseEntered="#renderHoveredCardHand" onMouseExited="#unrenderHoveredCard" prefHeight="200.0" prefWidth="100.0">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="hand3" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="hand3" alignment="TOP_CENTER" onMouseClicked="#handlePlanning" onMouseEntered="#renderHoveredCardHand" onMouseExited="#unrenderHoveredCard" prefHeight="200.0" prefWidth="100.0">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="hand4" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="hand4" alignment="TOP_CENTER" onMouseClicked="#handlePlanning" onMouseEntered="#renderHoveredCardHand" onMouseExited="#unrenderHoveredCard" prefHeight="200.0" prefWidth="100.0">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="hand5" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="hand5" alignment="TOP_CENTER" onMouseClicked="#handlePlanning" onMouseEntered="#renderHoveredCardHand" onMouseExited="#unrenderHoveredCard" prefHeight="200.0" prefWidth="100.0">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
@@ -148,7 +150,12 @@
                         <Insets bottom="20.0" top="20.0" />
                      </HBox.margin>
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#123b61" height="260.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="200.0" />
+                        <ImageView fx:id="hoverCardImage" fitHeight="200.0" fitWidth="205.0" layoutX="-7.0" layoutY="31.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@icon.png" />
+                           </image>
+                        </ImageView>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="204.0" layoutX="-7.0" layoutY="28.0" stroke="BLACK" strokeWidth="4.0" width="209.0" />
                      </children>
                   </Pane>
                   <Pane prefHeight="300.0" prefWidth="460.0">
@@ -193,6 +200,41 @@
                         <Label fx:id="manaCount" layoutX="416.0" layoutY="150.0" prefHeight="30.0" prefWidth="46.0" text="0">
                            <font>
                               <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hoverCardDescription" alignment="TOP_LEFT" layoutX="193.0" layoutY="11.0" prefHeight="174.0" prefWidth="154.0" text="Description" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hoverCardName" alignment="TOP_LEFT" layoutX="13.0" layoutY="11.0" prefHeight="50.0" prefWidth="154.0" text="Name" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hoverCardAtk" layoutX="14.0" layoutY="53.0" prefHeight="21.0" prefWidth="154.0" text="ATK: ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hoverCardHp" layoutX="14.0" layoutY="80.0" prefHeight="21.0" prefWidth="154.0" text="HP:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hoverCardLvl" layoutX="14.0" layoutY="110.0" prefHeight="21.0" prefWidth="154.0" text="LVL:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hoverCardExp" layoutX="13.0" layoutY="140.0" prefHeight="21.0" prefWidth="154.0" text="EXP:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hoverCardType" layoutX="14.0" layoutY="167.0" prefHeight="21.0" prefWidth="154.0" text="TYPE:">
+                           <font>
+                              <Font size="15.0" />
                            </font>
                         </Label>
                      </children>

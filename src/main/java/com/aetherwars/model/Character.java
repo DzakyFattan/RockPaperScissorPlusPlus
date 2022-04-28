@@ -79,6 +79,11 @@ public class Character extends Card{
   }
 
   @Override
+  public String getCardType() {
+    return "Character";
+  }
+
+  @Override
   public String toSpecString() {
     return "ATK " + this.attack + "/HP " + this.health;
   }

@@ -38,6 +38,11 @@ public abstract class Spell extends Card {
     }
 
     @Override
+    public String getCardType() {
+        return "Spell";
+    }
+
+    @Override
     public String toString() {
         return  " Spell{name=" + this.getName() + ", duration=" + duration + ", type=" + type + '}';
     }
