@@ -135,6 +135,13 @@ public class Board {
             return P1.getField();
     }
 
+    public Map<Integer, CardOnField> getCurrentOpponentField() {
+        if (whoseTurn.equals("P2"))
+            return P1.getField();
+        else
+            return P2.getField();
+    }
+
     public void addToCurrentPlayerField(int slot, CardOnField card) {
         if (whoseTurn.equals("P2"))
             P2.addCardToField(slot, card);
@@ -168,6 +175,13 @@ public class Board {
             P2.reduceMana(amount);
         else
             P1.reduceMana(amount);
+    }
+
+    public void reduceCurrentOpponentHealth(int amount) {
+        if (whoseTurn.equals("P2"))
+            P1.reduceHealth(amount);
+        else
+            P2.reduceHealth(amount);
     }
     // Bagian Battle
 

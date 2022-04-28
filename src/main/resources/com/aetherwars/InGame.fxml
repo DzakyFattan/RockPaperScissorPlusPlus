@@ -23,6 +23,11 @@
                      <children>
                         <Rectangle fx:id="rectLeftHealth" arcHeight="5.0" arcWidth="5.0" fill="#73e86b" height="30.0" layoutX="40.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="500.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="30.0" layoutX="40.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="500.0" />
+                        <Label fx:id="p1Health" layoutX="40.0" layoutY="72.0" text="100">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                   <Pane prefHeight="100.0" prefWidth="120.0">
@@ -44,6 +49,11 @@
                      <children>
                         <Rectangle fx:id="rectRightHealth" arcHeight="5.0" arcWidth="5.0" fill="#73e86b" height="30.0" layoutX="40.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="500.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="30.0" layoutX="40.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="500.0" />
+                        <Label fx:id="p2Health" layoutX="509.0" layoutY="72.0" text="100">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </children>
@@ -53,7 +63,7 @@
                   <Pane fx:id="p1FieldPane" prefHeight="270.0" prefWidth="640.0">
                      <children>
                         <Rectangle fx:id="p1Frame" arcHeight="5.0" arcWidth="5.0" fill="#7dc0ff" height="100.0" layoutX="40.0" layoutY="86.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                        <ImageView fitHeight="85.0" fitWidth="94.0" layoutX="48.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="85.0" fitWidth="94.0" layoutX="48.0" layoutY="93.0" onMouseClicked="#handleBattle" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@steve.png" />
                            </image>
@@ -133,7 +143,7 @@
                   <Pane fx:id="p2FieldPane" prefHeight="270.0" prefWidth="640.0">
                      <children>
                         <Rectangle fx:id="p2Frame" arcHeight="5.0" arcWidth="5.0" fill="#ff8383" height="100.0" layoutX="400.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                        <ImageView fitHeight="85.0" fitWidth="100.0" layoutX="408.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="85.0" fitWidth="100.0" layoutX="408.0" layoutY="93.0" onMouseClicked="#handleBattle" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@alex.jpg" />
                            </image>

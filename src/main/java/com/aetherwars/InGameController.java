@@ -47,10 +47,15 @@ public class InGameController {
     private List<Card> threeCards;
     private Board board;
     private boolean isPlanning;
+    private boolean isAttacking;
     private Card planHandCard;
     private Card planFieldCard;
     private int planHandCardIndex;
     private int planFieldCardIndex;
+    private CardOnField attackingCard;
+    private CardOnField defendingCard;
+    private int attackerIndex;
+    private int defenderIndex;
 
     @FXML private Label labelTurn;
     @FXML private Label labelMiddle;
@@ -82,6 +87,10 @@ public class InGameController {
     @FXML private Pane p2FieldPane;
     @FXML private Button addExpButton;
     @FXML private Button deleteButton;
+    @FXML private Rectangle rectRightHealth;
+    @FXML private Rectangle rectLeftHealth;
+    @FXML private Label p1Health;
+    @FXML private Label p2Health;
 
     public InGameController() {
         Platform.runLater(() -> {
@@ -161,6 +170,14 @@ public class InGameController {
 
     public void renderBoard() {
         labelTurn.setText(Integer.toString(board.getTurnCounter()));
+        double healthP1 = board.getP1().getHealth() / 80.0;
+        double healthP2 = board.getP2().getHealth() / 80.0;
+        p1Health.setText(Integer.toString(board.getP1().getHealth()));
+        p2Health.setText(Integer.toString(board.getP2().getHealth()));
+        rectLeftHealth.scaleXProperty().set(healthP1);
+        rectLeftHealth.translateXProperty().set(-250.0 + (healthP1 * 500.0 * 0.5));
+        rectRightHealth.scaleXProperty().set(healthP2);
+        rectRightHealth.translateXProperty().set(250.0 - (healthP2 * 500.0 * 0.5));
         deckCount.setText(Integer.toString(board.getCurrentPlayerDeckCount()));
         playerManaCount.setText(Integer.toString(board.getCurrentPlayerMana()));
         manaCount.setText(Integer.toString(board.getManaCounter()));
@@ -331,6 +348,10 @@ public class InGameController {
         return board.getWhoseTurn().equals("P1") ? p1FieldPane.getChildren().indexOf(fieldCard) : p2FieldPane.getChildren().indexOf(fieldCard);
     }
 
+    private int getOpponentFieldCardIndex(Pane fieldCard) {
+        return board.getWhoseTurn().equals("P2") ? p1FieldPane.getChildren().indexOf(fieldCard) : p2FieldPane.getChildren().indexOf(fieldCard);
+    }
+
     public void renderHoveredCardHand(Event e) {
         VBox handCardBox = (VBox) e.getSource();
         handCardBox.setOpacity(0.6);
@@ -435,6 +456,7 @@ public class InGameController {
     public void onFieldCardClicked(Event e) {
         handlePlanning(e);
         placePlannedCardOnField(e);
+        handleBattle(e);
     }
 
     public void handlePlanning(Event e) {
@@ -543,6 +565,45 @@ public class InGameController {
             isPlanning = false;
             resetHandBackgrounds();
             renderBoard();
+        }
+    }
+
+    public void handleBattle(Event e) {
+        if (board.getPhase().equals("ATTACK")) {
+            Node fieldCard = (Node) e.getSource();
+            Pane fieldPane = (Pane) fieldCard.getParent();
+            if (!isAttacking) {
+                resetFieldBackgrounds();
+                if (fieldPane.equals(p1FieldPane) && board.getWhoseTurn().equals("P2")) {
+                    return;
+                } else if (fieldPane.equals(p2FieldPane) && board.getWhoseTurn().equals("P1")) {
+                    return;
+                }
+                attackerIndex = getFieldCardIndex((Pane)fieldCard) - 2;
+                if (!board.getCurrentPlayerField().containsKey(attackerIndex)) {
+                    return;
+                }
+                attackingCard = board.getCurrentPlayerField().get(attackerIndex);
+                ((Rectangle)((Pane)fieldCard).getChildren().get(0)).setFill(Color.LIGHTGREEN);
+                isAttacking = true;
+            } else {
+                if (fieldCard instanceof ImageView && board.getCurrentOpponentField().isEmpty()) {
+                    board.reduceCurrentOpponentHealth(attackingCard.getAttack());
+                    isAttacking = false;
+                    resetFieldBackgrounds();
+                    renderBoard();
+                } else {
+                    defenderIndex = getOpponentFieldCardIndex((Pane)fieldCard) - 2;
+                    if (!board.getCurrentOpponentField().containsKey(defenderIndex)) {
+                        return;
+                    }
+                    defendingCard = board.getCurrentOpponentField().get(defenderIndex);
+                    isAttacking = false;
+                    resetFieldBackgrounds();
+                    renderBoard();
+                    //TODO: add battle
+                }
+            }
         }
     }
 
