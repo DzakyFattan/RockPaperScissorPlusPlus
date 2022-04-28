@@ -1,10 +1,12 @@
 package com.aetherwars.model;
 
 import com.aetherwars.player.Player;
+import com.aetherwars.slot.CardOnField;
 import com.aetherwars.spells.Spell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 enum BattlePhase {
     DRAW, PLAN, ATTACK, END
@@ -114,6 +116,27 @@ public class Board {
             return P1.getTopCardsFromDeck();
     }
 
+    public Map<Integer, CardOnField> getPlayerField(String player) {
+        if (player.equals("P2"))
+            return P2.getField();
+        else
+            return P1.getField();
+    }
+
+    public Map<Integer, CardOnField> getCurrentPlayerField() {
+        if (whoseTurn.equals("P2"))
+            return P2.getField();
+        else
+            return P1.getField();
+    }
+
+    public void addToCurrentPlayerField(int slot, CardOnField card) {
+        if (whoseTurn.equals("P2"))
+            P2.addCardToField(slot, card);
+        else
+            P1.addCardToField(slot, card);
+    }
+
     public void addToCurrentPlayerHand(Card card) {
         if (whoseTurn.equals("P2"))
             P2.addCardToHand(card);
@@ -121,11 +144,25 @@ public class Board {
             P1.addCardToHand(card);
     }
 
+    public void removeFromCurrentPlayerHand(int slot) {
+        if (whoseTurn.equals("P2"))
+            P2.removeCardFromHand(slot);
+        else
+            P1.removeCardFromHand(slot);
+    }
+
     public void returnToCurrentPlayerDeck(List<Card> cards) {
         if (whoseTurn.equals("P2"))
             P2.returnCardsToDeck(cards);
         else
             P1.returnCardsToDeck(cards);
+    }
+
+    public void reduceCurrentPlayerMana(int amount) {
+        if (whoseTurn.equals("P2"))
+            P2.reduceMana(amount);
+        else
+            P1.reduceMana(amount);
     }
     // Bagian Battle
 

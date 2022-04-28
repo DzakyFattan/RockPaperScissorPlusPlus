@@ -4,7 +4,6 @@ import com.aetherwars.model.Character;
 import java.util.*;
 
 public class CardOnField extends Character{
-    private Character character;
     private int level;
     private int exp;
     private boolean isActive;
@@ -18,19 +17,10 @@ public class CardOnField extends Character{
     };
 
     public CardOnField(Character character) {
-        super();
+        super(character);
         this.level = 1;
         this.exp = 0;
         this.isActive = true;
-    }
-
-    // setters getters
-//    public Character getCharacter() {
-//        return character;
-//    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
     }
 
     public int getLevel() {
@@ -51,6 +41,10 @@ public class CardOnField extends Character{
 
     public void addExp(int exp) {
         this.exp += exp;
+    }
+
+    public int getCurrentExpReq() {
+        return expReq.get(level);
     }
 
     public void levelUp() {

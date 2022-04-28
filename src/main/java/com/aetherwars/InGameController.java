@@ -3,6 +3,7 @@ package com.aetherwars;
 
 import com.aetherwars.model.Board;
 import com.aetherwars.model.Card;
+import com.aetherwars.slot.CardOnField;
 import com.aetherwars.spells.Spell;
 import com.aetherwars.model.Character;
 import javafx.application.Platform;
@@ -30,6 +31,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class InGameController {
@@ -41,58 +43,38 @@ public class InGameController {
     List<Card> threeCards;
     private Board board;
     private boolean isPlanning;
+    private Card hoverHandCard;
     private Card planHandCard;
+    private int planHandCardIndex;
 
-    @FXML
-    private Label labelTurn;
-    @FXML
-    private Rectangle drawPhaseIndicator;
-    @FXML
-    private Rectangle planPhaseIndicator;
-    @FXML
-    private Rectangle attackPhaseIndicator;
-    @FXML
-    private Rectangle endPhaseIndicator;
-    @FXML
-    private Label deckCount;
-    @FXML
-    private Label playerManaCount;
-    @FXML
-    private Label manaCount;
-    @FXML
-    private Rectangle p1Frame;
-    @FXML
-    private Rectangle p2Frame;
-    @FXML
-    private VBox hand1;
-    @FXML
-    private VBox hand2;
-    @FXML
-    private VBox hand3;
-    @FXML
-    private VBox hand4;
-    @FXML
-    private VBox hand5;
-    @FXML
-    private VBox windowBox;
-    @FXML
-    private HBox threeCardsView;
-    @FXML
-    private ImageView hoverCardImage;
-    @FXML
-    private Label hoverCardName;
-    @FXML
-    private Label hoverCardDescription;
-    @FXML
-    private Label hoverCardAtk;
-    @FXML
-    private Label hoverCardHp;
-    @FXML
-    private Label hoverCardLvl;
-    @FXML
-    private Label hoverCardExp;
-    @FXML
-    private Label hoverCardType;
+    @FXML private Label labelTurn;
+    @FXML private Label labelMiddle;
+    @FXML private Rectangle drawPhaseIndicator;
+    @FXML private Rectangle planPhaseIndicator;
+    @FXML private Rectangle attackPhaseIndicator;
+    @FXML private Rectangle endPhaseIndicator;
+    @FXML private Label deckCount;
+    @FXML private Label playerManaCount;
+    @FXML private Label manaCount;
+    @FXML private Rectangle p1Frame;
+    @FXML private Rectangle p2Frame;
+    @FXML private VBox hand1;
+    @FXML private VBox hand2;
+    @FXML private VBox hand3;
+    @FXML private VBox hand4;
+    @FXML private VBox hand5;
+    @FXML private VBox windowBox;
+    @FXML private HBox threeCardsView;
+    @FXML private ImageView hoverCardImage;
+    @FXML private Label hoverCardName;
+    @FXML private Label hoverCardDescription;
+    @FXML private Label hoverCardAtk;
+    @FXML private Label hoverCardHp;
+    @FXML private Label hoverCardLvl;
+    @FXML private Label hoverCardExp;
+    @FXML private Label hoverCardType;
+    @FXML private Pane p1FieldPane;
+    @FXML private Pane p2FieldPane;
 
     public InGameController() {
         Platform.runLater(() -> {
@@ -131,6 +113,11 @@ public class InGameController {
         hoverCardLvl.setText(" ");
         hoverCardExp.setText(" ");
         hoverCardType.setText(" ");
+        hand1.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        hand2.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        hand3.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        hand4.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        hand5.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
     public void nextPhaseButtonClick(ActionEvent e) {
@@ -142,6 +129,7 @@ public class InGameController {
             board.nextPhase();
             planPhaseIndicator.setFill(Paint.valueOf("#eaeaea"));
             attackPhaseIndicator.setFill(Paint.valueOf("#ffa21f"));
+            resetHandBackgrounds();
         } else if (board.getPhase().equals("ATTACK")) {
             board.nextPhase();
             attackPhaseIndicator.setFill(Paint.valueOf("#eaeaea"));
@@ -163,17 +151,20 @@ public class InGameController {
         playerManaCount.setText(Integer.toString(board.getCurrentPlayerMana()));
         manaCount.setText(Integer.toString(board.getManaCounter()));
         if (board.getWhoseTurn().equals("P1")) {
+            labelMiddle.setText("<- Steve's Turn   ");
             p2Frame.setStroke(Paint.valueOf("#000000"));
             p2Frame.setStrokeWidth(1);
             p1Frame.setStroke(Paint.valueOf("#71e356"));
             p1Frame.setStrokeWidth(5);
         } else if (board.getWhoseTurn().equals("P2")) {
+            labelMiddle.setText("    Alex's Turn ->");
             p1Frame.setStroke(Paint.valueOf("#000000"));
             p1Frame.setStrokeWidth(1);
             p2Frame.setStroke(Paint.valueOf("#71e356"));
             p2Frame.setStrokeWidth(5);
         }
         renderCardsInHand();
+        renderField();
     }
 
     public void renderCardsInHand() {
@@ -205,28 +196,59 @@ public class InGameController {
                 hand1.getChildren().add(img);
                 hand1.getChildren().add(manaCost);
                 hand1.getChildren().add(spec);
-                hand1.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
             } else if (i == 1) {
                 hand2.getChildren().add(img);
                 hand2.getChildren().add(manaCost);
                 hand2.getChildren().add(spec);
-                hand2.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
             } else if (i == 2) {
                 hand3.getChildren().add(img);
                 hand3.getChildren().add(manaCost);
                 hand3.getChildren().add(spec);
-                hand3.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
             } else if (i == 3) {
                 hand4.getChildren().add(img);
                 hand4.getChildren().add(manaCost);
                 hand4.getChildren().add(spec);
-                hand4.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
             } else if (i == 4) {
                 hand5.getChildren().add(img);
                 hand5.getChildren().add(manaCost);
                 hand5.getChildren().add(spec);
-                hand5.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
             }
+        }
+    }
+
+    public void clearField(Pane fieldPane) {
+        for (Node child : fieldPane.getChildren()) {
+            if (child.getClass().equals(Pane.class)) {
+                Pane pane = (Pane) child;
+                ((ImageView)pane.getChildren().get(2)).setImage(null);
+                ((Label)pane.getChildren().get(1)).setText("");
+                ((Label)pane.getChildren().get(3)).setText("");
+                ((Label)pane.getChildren().get(4)).setText("");
+            }
+        }
+    }
+
+    public void renderCardOnField (Pane pane, CardOnField card) {;
+        ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource("card/image/error-icon.png"))));
+        try {
+            ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource(card.getImagePath()))));
+        } catch (Exception e) {
+            System.out.println("Error loading image");
+        }
+        ((Label)pane.getChildren().get(1)).setText("HP:" + card.getHealth());
+        ((Label)pane.getChildren().get(3)).setText("ATK:" + card.getAttack());
+        ((Label)pane.getChildren().get(4)).setText(card.getExp() + "/" + card.getCurrentExpReq() + "[" + card.getLevel() + "]");
+    }
+
+    public void renderField() {
+        clearField(p1FieldPane);
+        clearField(p2FieldPane);
+        for (Map.Entry<Integer, CardOnField> entry : board.getPlayerField("P1").entrySet()) {
+            renderCardOnField((Pane) p1FieldPane.getChildren().get(entry.getKey() + 2), entry.getValue());
+        }
+
+        for (Map.Entry<Integer, CardOnField> entry : board.getPlayerField("P2").entrySet()) {
+            renderCardOnField((Pane) p2FieldPane.getChildren().get(entry.getKey() + 2), entry.getValue());
         }
     }
 
@@ -297,25 +319,25 @@ public class InGameController {
         handCardBox.setOpacity(0.6);
         int index = getHandCardIndex(handCardBox);
         try {
-            planHandCard = board.getCurrentPlayerHand().get(index);
+            hoverHandCard = board.getCurrentPlayerHand().get(index);
         } catch (Exception e1) {
             return;
         }
-        hoverCardImage.setImage(new Image(String.valueOf(getClass().getResource(planHandCard.getImagePath()))));
-        hoverCardName.setText(planHandCard.getName());
-        hoverCardDescription.setText(planHandCard.getDescription());
-        if (planHandCard.getCardType().equals("Character")) {
-            hoverCardAtk.setText("ATK: " + ((Character) planHandCard).getAttack());
-            hoverCardHp.setText("HP: " + ((Character) planHandCard).getHealth());
+        hoverCardImage.setImage(new Image(String.valueOf(getClass().getResource(hoverHandCard.getImagePath()))));
+        hoverCardName.setText(hoverHandCard.getName());
+        hoverCardDescription.setText(hoverHandCard.getDescription());
+        if (hoverHandCard.getCardType().equals("Character")) {
+            hoverCardAtk.setText("ATK: " + ((Character) hoverHandCard).getAttack());
+            hoverCardHp.setText("HP: " + ((Character) hoverHandCard).getHealth());
             hoverCardLvl.setText(" ");
             hoverCardExp.setText(" ");
-            hoverCardType.setText("Type: " + ((Character)planHandCard).getType());
+            hoverCardType.setText("Type: " + ((Character)hoverHandCard).getType());
         } else {
-            hoverCardAtk.setText((planHandCard.toSpecString()));
+            hoverCardAtk.setText((hoverHandCard.toSpecString()));
             hoverCardHp.setText(" ");
             hoverCardLvl.setText(" ");
             hoverCardExp.setText(" ");
-            hoverCardType.setText("Type: " + ((Spell)planHandCard).getType());
+            hoverCardType.setText("Type: " + ((Spell)hoverHandCard).getType());
         }
     }
 
@@ -332,6 +354,15 @@ public class InGameController {
         hoverCardType.setText("");
     }
 
+    private void resetHandBackgrounds() {
+        hand1.setBackground(null);
+        hand2.setBackground(null);
+        hand3.setBackground(null);
+        hand4.setBackground(null);
+        hand5.setBackground(null);
+        isPlanning = false;
+    }
+
     public void handlePlanning(Event e) {
         if (board.getPhase().equals("PLAN")) {
             VBox handCardBox = (VBox) e.getSource();
@@ -341,7 +372,40 @@ public class InGameController {
             } catch (Exception e1) {
                 return;
             }
+            if (planHandCard.getManaCost() > board.getCurrentPlayerMana()) {
+                planHandCard = null;
+                return;
+            }
+            resetHandBackgrounds();
+            handCardBox.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+            isPlanning = true;
+            planHandCardIndex = index;
+        }
+    }
 
+    public void placePlannedCardOnField(Event e) {
+        if (board.getPhase().equals("PLAN") && isPlanning) {
+            Node fieldCardBox = (Node) e.getSource();
+            Pane fieldPane = (Pane) fieldCardBox.getParent();
+            if (fieldPane.equals(p1FieldPane) && board.getWhoseTurn().equals("P2")) {
+                return;
+            } else if (fieldPane.equals(p2FieldPane) && board.getWhoseTurn().equals("P1")) {
+                return;
+            }
+            int index = fieldPane.getChildren().indexOf(fieldCardBox) - 2;
+
+            if (planHandCard.getCardType().equals("Character")) {
+                if (board.getCurrentPlayerField().containsKey(index)) {
+                    return;
+                }
+                CardOnField cardOnField = new CardOnField((Character) planHandCard);
+                board.addToCurrentPlayerField(index, cardOnField);
+                board.reduceCurrentPlayerMana(planHandCard.getManaCost());
+                board.removeFromCurrentPlayerHand(planHandCardIndex);
+            }
+            resetHandBackgrounds();
+            renderBoard();
+            isPlanning = false;
         }
     }
 }

@@ -73,6 +73,10 @@ public class Player {
         this.hand.add(card);
     }
 
+    public void removeCardFromHand(int slot) {
+        this.hand.remove(slot);
+    }
+
     public Card getCardFromHand(int slot) {
         return this.hand.remove(slot);
     }
@@ -108,5 +112,9 @@ public class Player {
     public void returnCardsToDeck(List<Card> card) {
         this.deck.addAll(card);
         this.shuffleDeck();
+    }
+
+    public void addCardToField(Integer slot, CardOnField card) {
+        this.field.put(slot, card);
     }
 }

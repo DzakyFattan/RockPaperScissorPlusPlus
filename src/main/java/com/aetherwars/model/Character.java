@@ -27,6 +27,25 @@ public class Character extends Card{
     this.healthUp = Integer.parseInt(chara[9]);
   }
 
+  public Character(String name, String description, String image, int cost, CharacterType type, int attack, int health, int attackUp, int healthUp) {
+    super(name, description, image, cost);
+    this.type = type;
+    this.attack = attack;
+    this.health = health;
+    this.attackUp = attackUp;
+    this.healthUp = healthUp;
+  }
+
+  // Copy constructor
+  public Character(Character character) {
+    super(character.getName(), character.getDescription(), character.getImagePath(), character.getManaCost());
+    this.type = character.getType();
+    this.attack = character.getAttack();
+    this.health = character.getHealth();
+    this.attackUp = character.getAttackUp();
+    this.healthUp = character.getHealthUp();
+  }
+
   // setters
   public void setType(CharacterType type) {
     this.type = type;
