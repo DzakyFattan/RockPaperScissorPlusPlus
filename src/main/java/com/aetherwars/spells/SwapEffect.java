@@ -5,30 +5,40 @@ import java.util.ArrayList;
 import com.aetherwars.slot.CardOnField;
 
 public class SwapEffect {
-    private int duration;
+    private int durationLeft;
+    private boolean isPermanent;
     private List<Integer> targets;
 
     public SwapEffect(int duration, int cardIdx1, int cardIdx2) {
-        this.duration = duration;
+        this.durationLeft = duration;
+        this.isPermanent = duration == 0;
         this.targets = new ArrayList<Integer>();
         targets.add(cardIdx1);
         targets.add(cardIdx2);
     }
 
     public void tick(){
-        duration--;
+        if(durationLeft > 0 && !isPermanent){
+            durationLeft--;
+        }
     }
 
-    public int getDuration() {
-        return duration;
+    public int getDurationLeft() {
+        if (isPermanent) {
+            return 0;
+        }
+        return durationLeft;
     }
 
     public void addDuration(int duration){
-        this.duration += duration;
+        if(isPermanent){
+            return;
+        }
+        this.durationLeft += duration;
     }
 
     public boolean isActive(){
-        return duration > 0;
+        return durationLeft > 0 | isPermanent;
     }
 
     public static void swap(CardOnField card1, CardOnField card2){

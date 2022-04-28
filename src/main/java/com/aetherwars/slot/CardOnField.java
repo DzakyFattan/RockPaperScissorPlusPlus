@@ -52,7 +52,7 @@ public class CardOnField extends Character{
 
         // removes the potion if duration is below equals 0
         for (PotionSpell potion : activePots) {
-            if(potion.getDuration() <= 0) {
+            if(!potion.isActive()) {
                 activePots.remove(potion);
             }
         }
