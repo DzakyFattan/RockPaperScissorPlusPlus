@@ -53,10 +53,10 @@ public class Board {
                 Phase = BattlePhase.DRAW;
                 if (whoseTurn.equals("P2")) {
                     turnCounter++;
-                    tickAllSpells();
                 }
                 whoseTurn = (whoseTurn.equals("P1")) ? "P2" : "P1";
                 updateMana();
+                tickAllSpells();
         }
     }
 
@@ -80,6 +80,10 @@ public class Board {
         return turnCounter++;
     }
 
+    public void checkForDeathsOnField() {
+        P1.checkForDeathOnField();
+        P2.checkForDeathOnField();
+    }
     public void updateMana() {
         if (whoseTurn.equals("P2"))
             P2.updateMana(turnCounter);
@@ -149,6 +153,13 @@ public class Board {
             P1.addCardToField(slot, card);
     }
 
+    public void addToPlayerField(String player, int slot, CardOnField card) {
+        if (player.equals("P2"))
+            P2.addCardToField(slot, card);
+        else
+            P1.addCardToField(slot, card);
+    }
+
     public void addToCurrentPlayerHand(Card card) {
         if (whoseTurn.equals("P2"))
             P2.addCardToHand(card);
@@ -186,16 +197,19 @@ public class Board {
     // Bagian Battle
 
     // Bagian prep potion
-    public void applyMorphSpell(int targetCardSlot, MorphSpell morphSpell){
-        addToCurrentPlayerField(targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget() - 1)));
+    public void applyMorphSpell(String player, int targetCardSlot, MorphSpell morphSpell){
+        addToPlayerField(player, targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget() - 1)));
     }
 
     public void tickAllSpells() {
-        for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P1").entrySet()) {
-            entry.getValue().tick();
-        }
-        for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P2").entrySet()) {
-            entry.getValue().tick();
+        if (whoseTurn.equals("P2")) {
+            for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P1").entrySet()) {
+                entry.getValue().tick();
+            }
+        } else {
+            for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P2").entrySet()) {
+                entry.getValue().tick();
+            }
         }
     }
 }

@@ -92,6 +92,7 @@ public class Player {
             if (i < numCharacters) {
                 this.deck.add(characters.get(ran.nextInt(characters.size())));
             } else {
+                System.out.println(spells.get(ran.nextInt(characters.size())));
                 this.deck.add(spells.get(ran.nextInt(characters.size())));
             }
         }
@@ -116,5 +117,13 @@ public class Player {
 
     public void addCardToField(Integer slot, CardOnField card) {
         this.field.put(slot, card);
+    }
+
+    public void checkForDeathOnField() {
+        for (Map.Entry<Integer, CardOnField> entry : this.field.entrySet()) {
+            if (entry.getValue().getHealth() <= 0) {
+                this.field.remove(entry.getKey());
+            }
+        }
     }
 }

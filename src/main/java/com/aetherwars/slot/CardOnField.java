@@ -78,7 +78,7 @@ public class CardOnField extends Character{
 
     @Override
     public int getAttack(){
-        return Math.min(super.getAttack() + this.getAttackBuff(), 0);
+        return Math.max(super.getAttack() + this.getAttackBuff(), 0);
     }
 
     public int getAttackUnbounded(){

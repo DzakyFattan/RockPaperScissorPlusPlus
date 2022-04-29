@@ -4,10 +4,7 @@ package com.aetherwars;
 import com.aetherwars.model.Board;
 import com.aetherwars.model.Card;
 import com.aetherwars.slot.CardOnField;
-import com.aetherwars.spells.LevelSpell;
-import com.aetherwars.spells.MorphSpell;
-import com.aetherwars.spells.PotionSpell;
-import com.aetherwars.spells.Spell;
+import com.aetherwars.spells.*;
 import com.aetherwars.model.Character;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -503,16 +500,17 @@ public class InGameController {
             }
             Node fieldCardBox = (Node) e.getSource();
             Pane fieldPane = (Pane) fieldCardBox.getParent();
-            if (fieldPane.equals(p1FieldPane) && board.getWhoseTurn().equals("P2")) {
-                isPlanning = false;
-                return;
-            } else if (fieldPane.equals(p2FieldPane) && board.getWhoseTurn().equals("P1")) {
-                isPlanning = false;
-                return;
-            }
+
             int index = fieldPane.getChildren().indexOf(fieldCardBox) - 2;
 
             if (planHandCard.getCardType().equals("Character")) {
+                if (fieldPane.equals(p1FieldPane) && board.getWhoseTurn().equals("P2")) {
+                    isPlanning = false;
+                    return;
+                } else if (fieldPane.equals(p2FieldPane) && board.getWhoseTurn().equals("P1")) {
+                    isPlanning = false;
+                    return;
+                }
                 if (board.getCurrentPlayerField().containsKey(index)) {
                     isPlanning = false;
                     return;
@@ -521,20 +519,29 @@ public class InGameController {
                 board.addToCurrentPlayerField(index, cardOnField);
                 board.reduceCurrentPlayerMana(planHandCard.getManaCost());
                 board.removeFromCurrentPlayerHand(planHandCardIndex);
-            }
-
-            if (planHandCard.getCardType().equals("Spell")) {
-                if (board.getCurrentPlayerField().containsKey(index)) {
+            } else if (planHandCard.getCardType().equals("Spell")) {
+                if (board.getCurrentPlayerField().containsKey(index) || board.getCurrentOpponentField().containsKey(index)) {
                     CardOnField cardOnField = board.getCurrentPlayerField().get(index);
+                    String playerTarget = "";
+                    if (fieldPane.equals(p1FieldPane)) {
+                        playerTarget = "P1";
+                        cardOnField = board.getPlayerField("P1").get(index);
+                    } else if (fieldPane.equals(p2FieldPane)) {
+                        playerTarget = "P2";
+                        cardOnField = board.getPlayerField("P2").get(index);
+                    }
                     if (planHandCard instanceof PotionSpell) {
                         cardOnField.applyPotionSpell((PotionSpell) planHandCard);
                     } else if (planHandCard instanceof LevelSpell) {
                         cardOnField.applyLevelSpell((LevelSpell) planHandCard);
                     } else if (planHandCard instanceof MorphSpell) {
-                        board.applyMorphSpell(index, (MorphSpell) planHandCard);
-                    } //TODO: add swap spell
+                        board.applyMorphSpell(playerTarget, index, (MorphSpell) planHandCard);
+                    } else if (planHandCard instanceof SwapSpell) {
+                        cardOnField.applySwapSpell((SwapSpell) planHandCard);
+                    }
                     board.reduceCurrentPlayerMana(planHandCard.getManaCost());
                     board.removeFromCurrentPlayerHand(planHandCardIndex);
+                    board.checkForDeathsOnField();
                 }
             }
             resetHandBackgrounds();
