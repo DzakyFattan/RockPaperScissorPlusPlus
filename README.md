@@ -23,7 +23,31 @@
 Sebuah Aplikasi  game kartu turn based untuk 2 pemain. Pemain bermain secara bergantian pada 1 layar yang sama. Tujuan dari game ini adalah menghabiskan health points (HP) musuh. HP dapat berkurang apabila terkena serangan dari kartu karakter yang diletakkan di board. HP  Pemain bisa dilindungi dari serangan musuh oleh karakter yang dikeluarkan pemain sehingga secara efektif HP yang turun pertama kali ketika musuh menyerang merupakan karakter pemain tersebut. Pemain bisa mengambil sebuah kartu setiap ronde berakhir dengan maksimal kartu yang disimpan 5. Pemain dapat mengeluarkan kartu-kartu tersebut berdasarkan mana yang perlu dibayar untuk mengeluarkan kartu tersebut serta mana yang dimiliki pemain. Mana akan di-reset setiap ronde berakhir.
 
 ## Code Structure
-
+```
+└─src
+    └─main
+        ├─java
+        │  └─com
+        │      └─aetherwars
+        │          ├─battle
+        │          ├─model
+        │          ├─player
+        │          ├─slot
+        │          ├─spells
+        │          └─util
+        └─resources
+            └─com
+                └─aetherwars
+                    └─card
+                        ├─data
+                        └─image
+                            ├─character
+                            └─spell
+                                ├─level
+                                ├─morph
+                                ├─potion
+                                └─swap
+```
 
 ## Screenshots
 ![Main Screen](https://media.discordapp.net/attachments/893484082275708980/969597536925024276/unknown.png?width=1177&height=701)![Player 1 picks a card](https://media.discordapp.net/attachments/893484082275708980/969597554557865994/unknown.png?width=1188&height=702)![Player 1 picked a card](https://media.discordapp.net/attachments/893484082275708980/969597580214411264/unknown.png?width=1180&height=700)
