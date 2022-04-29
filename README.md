@@ -1,31 +1,73 @@
-# IF2210 Project Template
 
-Here is an example of project using gradle as the build tools.
-Try running these commands:
 
-`./gradlew run`
+<h1 align="center">
+  <br>
+  <a><img src="https://media.discordapp.net/attachments/893484082275708980/969594967880241152/icon.png" width="200"></a>
+  <br>
+ DNA At Work
+  <br>
+</h1>
 
-You will notice that it will open a window that display 'Minecraft: Aether Wars'.
-In the command line you can see the data that is being read by `CSVReader.java`
+<h4 align="center">A 2-player, minecraft themed, turn based card game</h4>
 
-What happen is when you use `./gradlew run`, it will start the main function in your app.
-For this app, the main function lives in `AetherWars.java`.
+<p align="center">
+  <a href="#description">Description</a> •
+  <a href="#code-structure">Code Structure</a> •
+  <a href="#screenshots">Screenshots</a> <br>
+  <a href="#compiling-&-running">Compiling & Running</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#footnote">Footnote</a> 
+</p>
 
-You can explore more about gradle [here](https://guides.gradle.org/creating-new-gradle-builds/)
+## Description
+Sebuah Aplikasi  game kartu turn based untuk 2 pemain. Pemain bermain secara bergantian pada 1 layar yang sama. Tujuan dari game ini adalah menghabiskan health points (HP) musuh. HP dapat berkurang apabila terkena serangan dari kartu karakter yang diletakkan di board. HP  Pemain bisa dilindungi dari serangan musuh oleh karakter yang dikeluarkan pemain sehingga secara efektif HP yang turun pertama kali ketika musuh menyerang merupakan karakter pemain tersebut. Pemain bisa mengambil sebuah kartu setiap ronde berakhir dengan maksimal kartu yang disimpan 5. Pemain dapat mengeluarkan kartu-kartu tersebut berdasarkan mana yang perlu dibayar untuk mengeluarkan kartu tersebut serta mana yang dimiliki pemain. Mana akan di-reset setiap ronde berakhir.
 
-## JDK
+## Code Structure
 
-As of the creation of this template, the assistant team used and tested the JDK 8 installation from OpenJDK and Amazon Corretto (since JavaFX is readily available on those installations). You can easily pick and install your desired JDK version and variant by doing it via an IDE like [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
-## Credit
+## Screenshots
+![Main Screen](https://media.discordapp.net/attachments/893484082275708980/969597536925024276/unknown.png?width=1177&height=701)![Player 1 picks a card](https://media.discordapp.net/attachments/893484082275708980/969597554557865994/unknown.png?width=1188&height=702)![Player 1 picked a card](https://media.discordapp.net/attachments/893484082275708980/969597580214411264/unknown.png?width=1180&height=700)
+## Compiling & Running
+1. Install [java 8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
+2. Install [gradle](https://gradle.org/)
+3. Download source code dari repository ini
+4. Pergi ke folder yang mengandung source code repository ini
+5. Buka terminal pada folder ini
+6. Jalankan program melalui command berikut
+```bash
+# Jalankan Program
+./gradlew run
+```
 
-Minecraft images and description are taken from [Minecraft Wikia](https://minecraft.fandom.com/wiki/)
-Other sources for "random" images are:
+## Credits
+<table>
+    <tr>
+      <td><b>Nama</b></td>
+      <td><b>NIM</b></td>
+    </tr>
+    <tr>
+      <td><b>Dzaky Fattan Rizqullah</b></td>
+      <td><b>13520003</b></td>
+        <tr>
+      <td><b>Bariza Haqi</b></td>
+      <td><b>13520018</b></td>
+    </tr>
+            <tr>
+      <td><b>Jeremy S.O.N. Simbolon</b></td>
+      <td><b>13520042</b></td>
+    </tr>
+            <tr>
+      <td><b>Farrel Farandieka Fibriyanto</b></td>
+      <td><b>13520054</b></td>
+    </tr>
+            <tr>
+      <td><b>Zayd Muhammad Kawakibi Zuhri</b></td>
+      <td><b>13520144</b></td>
+    </tr>
+</table>
 
-- Album Supporteran STEI 2018 :D
-- https://mobile.twitter.com/masterlimbad6
-- https://www.nationalgeographic.com/science/article/141104-kamikaze-kublai-khan-winds-typhoon-japan-invasion
-- https://open.spotify.com/album/3GzwPyPZCyrqUTaurTaS23
-- https://cdn.wccftech.com/wp-content/uploads/2021/06/nvidia-geforce-rtx-3080-ti-product-gallery-photo-003-scaled.jpg
-- https://twitter.com/GGumiliar
-- https://dota2.fandom.com/wiki/Spectre
+## Footnote
+
+
+
+
