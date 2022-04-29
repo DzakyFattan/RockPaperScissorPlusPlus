@@ -51,6 +51,10 @@ public class CardOnField extends Character{
         if(!swapEffect.isActive()){
             SwapEffect newSwapEffect = new SwapEffect(swapSpell.getDuration());
             this.swapEffect = newSwapEffect;
+
+            // swaps stats
+            super.setAttack(super.getHealth());
+            super.setHealth(super.getAttack());
         } else {
             swapEffect.addDuration(swapSpell.getDuration());
         }
