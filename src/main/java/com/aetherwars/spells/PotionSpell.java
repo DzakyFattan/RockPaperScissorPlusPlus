@@ -1,6 +1,6 @@
 package com.aetherwars.spells;
 
-public class PotionSpell extends Spell implements TemporarySpell{
+public class PotionSpell extends Spell implements TemporarySpell {
 
     private int attack_change;
     private int health_change;
@@ -22,13 +22,13 @@ public class PotionSpell extends Spell implements TemporarySpell{
     }
 
     // Reduces the duration of the spell, as in for each round that has passed
-    public void tick(){
-        if(this.durationLeft > 0 && this.duration != 0){
+    public void tick() {
+        if (this.durationLeft > 0 && this.duration != 0) {
             durationLeft--;
         }
     }
 
-    public boolean isActive(){
+    public boolean isActive() {
         return this.getDurationLeft() > 0 || super.getDuration() == 0;
     }
 
@@ -37,16 +37,8 @@ public class PotionSpell extends Spell implements TemporarySpell{
     }
 
     // Setters
-    public void reduceHealthChange(int attack_damage){
+    public void reduceHealthChange(int attack_damage) {
         this.health_change -= attack_damage;
-    }
-
-    public void setAttackChange(int attack_change) {
-        this.attack_change = attack_change;
-    }
-
-    public void setHealthChange(int health_change) {
-        this.health_change = health_change;
     }
 
     // Getters
@@ -54,8 +46,16 @@ public class PotionSpell extends Spell implements TemporarySpell{
         return this.attack_change;
     }
 
+    public void setAttackChange(int attack_change) {
+        this.attack_change = attack_change;
+    }
+
     public int getHealthChange() {
         return this.health_change;
+    }
+
+    public void setHealthChange(int health_change) {
+        this.health_change = health_change;
     }
 
     @Override

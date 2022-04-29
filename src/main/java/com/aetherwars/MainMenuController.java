@@ -1,7 +1,7 @@
 package com.aetherwars;
 
-import com.aetherwars.spells.Spell;
 import com.aetherwars.model.Character;
+import com.aetherwars.spells.Spell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,17 +16,15 @@ import java.util.List;
 
 public class MainMenuController {
 
+    Stage fxmlstage;
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     // For passing to InGameController
     private List<Character> characters;
     private List<Spell> spells;
-
     @FXML
     private AnchorPane mainMenuPane;
-    Stage fxmlstage;
 
     public void startGame(ActionEvent e) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/aetherwars/InGame.fxml"));
@@ -34,7 +32,7 @@ public class MainMenuController {
         InGameController controller = fxmlLoader.getController();
         controller.setCharacters(characters);
         controller.setSpells(spells);
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

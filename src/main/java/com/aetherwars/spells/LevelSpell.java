@@ -14,10 +14,10 @@ public class LevelSpell extends Spell {
         this.level_type = LevelSpellType.valueOf(data[4]);
     }
 
-    // Setter
-    public void setLevelType(LevelSpellType level_type) {
-        this.level_type = level_type;
+    public static int getLvlSpellManaCost(int characterLevel) {
+        return (int) Math.ceil((double) characterLevel / 2.0);
     }
+
     public void setManaCost(int mana) {
         super.manaCost = mana;
     }
@@ -27,8 +27,9 @@ public class LevelSpell extends Spell {
         return this.level_type;
     }
 
-    public static int getLvlSpellManaCost(int characterLevel){
-        return (int) Math.ceil((double) characterLevel/2.0);
+    // Setter
+    public void setLevelType(LevelSpellType level_type) {
+        this.level_type = level_type;
     }
 
     @Override

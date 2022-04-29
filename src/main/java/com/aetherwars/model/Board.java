@@ -2,22 +2,22 @@ package com.aetherwars.model;
 
 import com.aetherwars.player.Player;
 import com.aetherwars.slot.CardOnField;
-import com.aetherwars.spells.*;
+import com.aetherwars.spells.MorphSpell;
+import com.aetherwars.spells.Spell;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 enum BattlePhase {
     DRAW, PLAN, ATTACK, END
-};
+}
 
 public class Board {
     private BattlePhase Phase;
-    private Player P1;
-    private Player P2;
+    private final Player P1;
+    private final Player P2;
 
-    private List<Character> characters;
+    private final List<Character> characters;
     private int turnCounter;
     private String whoseTurn;
     private int manaCounter;
@@ -35,9 +35,10 @@ public class Board {
     public String getPhase() {
         return Phase.toString();
     }
+
     public void nextPhase() {
         BattlePhase currentPhase = Phase;
-        switch(currentPhase) {
+        switch (currentPhase) {
             case DRAW:
                 Phase = BattlePhase.PLAN;
                 break;
@@ -83,13 +84,14 @@ public class Board {
         P1.checkForDeathOnField();
         P2.checkForDeathOnField();
     }
+
     public void updateMana() {
         if (whoseTurn.equals("P2"))
             P2.updateMana(turnCounter);
         else
             P1.updateMana(turnCounter);
-            manaCounter = turnCounter;
-            manaCounter = Math.min(manaCounter, 10);
+        manaCounter = turnCounter;
+        manaCounter = Math.min(manaCounter, 10);
     }
 
     public int getManaCounter() {
@@ -101,7 +103,7 @@ public class Board {
             return P2.getMana();
         else
             return P1.getMana();
-    };
+    }
 
     public int getCurrentPlayerDeckCount() {
         if (whoseTurn.equals("P2"))
@@ -195,13 +197,17 @@ public class Board {
     }
 
     public void resetFieldStatus() {
-        for (CardOnField card : P1.getField().values()) { card.setStatus(true); }
-        for (CardOnField card : P2.getField().values()) { card.setStatus(true); }
+        for (CardOnField card : P1.getField().values()) {
+            card.setStatus(true);
+        }
+        for (CardOnField card : P2.getField().values()) {
+            card.setStatus(true);
+        }
     }
     // Bagian Battle
 
     // Bagian prep potion
-    public void applyMorphSpell(String player, int targetCardSlot, MorphSpell morphSpell){
+    public void applyMorphSpell(String player, int targetCardSlot, MorphSpell morphSpell) {
         addToPlayerField(player, targetCardSlot, new CardOnField(characters.get(morphSpell.getTarget() - 1)));
     }
 

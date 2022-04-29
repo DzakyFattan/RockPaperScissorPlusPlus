@@ -14,14 +14,14 @@ public class MorphSpell extends Spell {
         this.target = Integer.parseInt(data[4]);
     }
 
-    // Setter
-    public void setTarget(int target) {
-        this.target = target;
-    }
-
     // Getter
     public int getTarget() {
         return this.target;
+    }
+
+    // Setter
+    public void setTarget(int target) {
+        this.target = target;
     }
 
     @Override

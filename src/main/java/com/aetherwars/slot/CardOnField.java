@@ -2,22 +2,24 @@ package com.aetherwars.slot;
 
 import com.aetherwars.model.Character;
 import com.aetherwars.spells.*;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CardOnField extends Character {
-    private int level;
-    private int exp;
-    private boolean canAttack;
-    private List<PotionSpell> activePots;
-    private SwapEffect swapEffect;
-
-    private static HashMap<Integer, Integer> expReq = new HashMap<Integer, Integer>() {
+    private static final HashMap<Integer, Integer> expReq = new HashMap<Integer, Integer>() {
         {
             for (int i = 1; i <= 10; i++) {
                 put(i, 2 * i - 1);
             }
         }
     };
+    private int level;
+    private int exp;
+    private boolean canAttack;
+    private List<PotionSpell> activePots;
+    private SwapEffect swapEffect;
 
     public CardOnField(Character character) {
         super(character);
@@ -38,8 +40,7 @@ public class CardOnField extends Character {
                 this.level++;
                 super.levelUp();
             }
-        }
-        else {
+        } else {
             if (this.level > 1) {
                 this.level--;
                 super.levelDown();
@@ -48,14 +49,14 @@ public class CardOnField extends Character {
         this.exp = 0;
     }
 
-    private void swapStats(){
+    private void swapStats() {
         int tempAttack = super.getAttack();
         super.setAttack(super.getHealth());
         super.setHealth(tempAttack);
     }
 
     public void applySwapSpell(SwapSpell swapSpell) {
-        if(!swapEffect.isActive()){
+        if (!swapEffect.isActive()) {
             SwapEffect newSwapEffect = new SwapEffect(swapSpell.getDuration());
             this.swapEffect = newSwapEffect;
             this.swapStats();
@@ -80,7 +81,7 @@ public class CardOnField extends Character {
         // removes the potion if it has no effect
         boolean wasActive = swapEffect.isActive();
         swapEffect.tick();
-        if(wasActive && !swapEffect.isActive()){
+        if (wasActive && !swapEffect.isActive()) {
             this.swapStats();
         }
     }
@@ -93,7 +94,7 @@ public class CardOnField extends Character {
         this.canAttack = status;
     }
 
-    public int getAttackBuff(){
+    public int getAttackBuff() {
         int attackBuff = 0;
         for (PotionSpell potion : activePots) {
             attackBuff += potion.getAttackChange();
@@ -102,15 +103,15 @@ public class CardOnField extends Character {
     }
 
     @Override
-    public int getAttack(){
+    public int getAttack() {
         return Math.max(super.getAttack() + this.getAttackBuff(), 0);
     }
 
-    public int getAttackUnbounded(){
+    public int getAttackUnbounded() {
         return super.getAttack() + this.getAttackBuff();
     }
 
-    public int getHealthBuff(){
+    public int getHealthBuff() {
         int healthBuff = 0;
         for (PotionSpell potion : activePots) {
             healthBuff += potion.getHealthChange();
@@ -119,17 +120,17 @@ public class CardOnField extends Character {
     }
 
     @Override
-    public int getHealth(){
+    public int getHealth() {
         return super.getHealth() + this.getHealthBuff();
     }
 
     @Override
-    public void reduceHealth(int amount){
+    public void reduceHealth(int amount) {
         int remainingAmount = amount;
         // reduces health from potion buff first
-        if (this.getHealthBuff() != 0){
-            for(PotionSpell potion : activePots){
-                if (potion.getHealthChange() > 0 && remainingAmount > 0){
+        if (this.getHealthBuff() != 0) {
+            for (PotionSpell potion : activePots) {
+                if (potion.getHealthChange() > 0 && remainingAmount > 0) {
                     int reducePotBuff = Math.min(potion.getHealthChange(), remainingAmount);
                     potion.reduceHealthChange(reducePotBuff);
                     remainingAmount -= reducePotBuff;
@@ -138,16 +139,16 @@ public class CardOnField extends Character {
         }
 
         // reduces health from char card
-        if(remainingAmount > 0){
+        if (remainingAmount > 0) {
             super.reduceHealth(remainingAmount);
         }
     }
 
-    public List<PotionSpell> getActivePots(){
+    public List<PotionSpell> getActivePots() {
         return activePots;
     }
 
-    public void setActivePots(List<PotionSpell> newActivePots){
+    public void setActivePots(List<PotionSpell> newActivePots) {
         this.activePots = newActivePots;
     }
 
@@ -168,7 +169,7 @@ public class CardOnField extends Character {
     }
 
     public void addExp(int exp) {
-        if (this.level < 10){
+        if (this.level < 10) {
             this.exp += exp;
         }
     }
@@ -178,7 +179,7 @@ public class CardOnField extends Character {
     }
 
     public void levelUp() {
-        while(this.exp >= expReq.get(this.level)) {
+        while (this.exp >= expReq.get(this.level)) {
             this.exp -= expReq.get(this.level);
             this.level++;
             super.levelUp();

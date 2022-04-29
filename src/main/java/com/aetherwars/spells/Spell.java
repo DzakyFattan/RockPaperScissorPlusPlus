@@ -7,7 +7,7 @@ public abstract class Spell extends Card {
     protected int duration;
     private SpellType type;
 
-    public Spell(){
+    public Spell() {
         super();
         this.type = SpellType.PTN;
         this.duration = 0;
@@ -19,22 +19,22 @@ public abstract class Spell extends Card {
         this.duration = duration;
     }
 
-    // setters
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public void setType(SpellType type) {
-        this.type = type;
-    }
-
     // getters
     public int getDuration() {
         return this.duration;
     }
 
+    // setters
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public SpellType getType() {
         return this.type;
+    }
+
+    public void setType(SpellType type) {
+        this.type = type;
     }
 
     @Override
@@ -44,7 +44,7 @@ public abstract class Spell extends Card {
 
     @Override
     public String toString() {
-        return  " Spell{name=" + this.getName() + ", duration=" + duration + ", type=" + type + '}';
+        return " Spell{name=" + this.getName() + ", duration=" + duration + ", type=" + type + '}';
     }
 
     // unused override

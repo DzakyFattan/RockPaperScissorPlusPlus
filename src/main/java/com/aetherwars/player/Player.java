@@ -1,19 +1,19 @@
 package com.aetherwars.player;
 
-import java.util.*;
-
-import com.aetherwars.model.*;
+import com.aetherwars.model.Card;
 import com.aetherwars.model.Character;
 import com.aetherwars.slot.CardOnField;
 import com.aetherwars.spells.Spell;
 
+import java.util.*;
+
 public class Player {
-    private String name;
+    private final String name;
     private int health;
     private int mana;
-    private List<Card> deck;
-    private List<Card> hand;
-    private Map<Integer, CardOnField> field;
+    private final List<Card> deck;
+    private final List<Card> hand;
+    private final Map<Integer, CardOnField> field;
 
     public Player(String name, List<Character> characters, List<Spell> spells) {
         this.name = name;
@@ -52,7 +52,7 @@ public class Player {
 
     public int getDeckCount() {
         return this.deck.size();
-    };
+    }
 
     public void reduceHealth(int amount) {
         this.health -= amount;

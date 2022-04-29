@@ -1,10 +1,6 @@
 package com.aetherwars.spells;
 
-import java.util.List;
-import java.util.ArrayList;
-import com.aetherwars.slot.CardOnField;
-
-public class SwapEffect implements TemporarySpell{
+public class SwapEffect implements TemporarySpell {
     private int durationLeft;
     private boolean isPermanent;
 
@@ -13,8 +9,8 @@ public class SwapEffect implements TemporarySpell{
         this.isPermanent = duration == 0;
     }
 
-    public void tick(){
-        if(durationLeft > 0 && !isPermanent){
+    public void tick() {
+        if (durationLeft > 0 && !isPermanent) {
             durationLeft--;
         }
     }
@@ -26,11 +22,11 @@ public class SwapEffect implements TemporarySpell{
         return durationLeft;
     }
 
-    public void addDuration(int duration){
-        if(isPermanent){
+    public void addDuration(int duration) {
+        if (isPermanent) {
             return;
         }
-        if(duration == 0){
+        if (duration == 0) {
             isPermanent = true;
             this.durationLeft = 0;
             return;
@@ -38,7 +34,7 @@ public class SwapEffect implements TemporarySpell{
         this.durationLeft += duration;
     }
 
-    public boolean isActive(){
+    public boolean isActive() {
         return durationLeft > 0 || isPermanent;
     }
 }

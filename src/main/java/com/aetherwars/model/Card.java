@@ -2,10 +2,10 @@ package com.aetherwars.model;
 
 public abstract class Card {
 
+    protected int manaCost;
     private String name;
     private String description;
     private String image_path;
-    protected int manaCost;
 
     public Card() {
         this.name = "Steve";
@@ -20,30 +20,30 @@ public abstract class Card {
         this.manaCost = manaCost;
     }
 
-    // setters
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setImagePath(String image_path) {
-        this.image_path = image_path;
-    }
-
     // getters
     public String getName() {
         return this.name;
+    }
+
+    // setters
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return this.description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getImagePath() {
         return this.image_path;
+    }
+
+    public void setImagePath(String image_path) {
+        this.image_path = image_path;
     }
 
     public int getManaCost() {

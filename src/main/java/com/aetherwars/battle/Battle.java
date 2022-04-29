@@ -3,23 +3,40 @@ package com.aetherwars.battle;
 import com.aetherwars.model.Board;
 import com.aetherwars.model.Character;
 import com.aetherwars.model.CharacterType;
-import com.aetherwars.player.Player;
 import com.aetherwars.slot.CardOnField;
-import com.aetherwars.battle.BattleAction;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Battle {
-    private Map<Integer, BattleAction> P1Actions;
-    private Map<Integer, BattleAction> P2Actions;
-    private Board board;
+    private final Map<Integer, BattleAction> P1Actions;
+    private final Map<Integer, BattleAction> P2Actions;
+    private final Board board;
 
     public Battle(Board board) {
         this.board = board;
         this.P1Actions = new HashMap<Integer, BattleAction>();
         this.P2Actions = new HashMap<Integer, BattleAction>();
+    }
+
+    private static int calculateAtk(Character attacking, Character defending) {
+        double modifier = Battle.calculateModifier(attacking, defending);
+
+        return (int) Math.ceil(attacking.getAttack() * modifier);
+    }
+
+    private static double calculateModifier(Character attacking, Character defending) {
+        //Set Attack Modifier; 1 jika tipe sama, 2 jika tipe lawan lebih lemah, 0.5 jika tipe lawan lebih kuat
+        double atkModifier;
+        if (attacking.getType() == defending.getType()) {
+            atkModifier = 1;
+        } else if (attacking.getType() == CharacterType.OVERWORLD && defending.getType() == CharacterType.END || attacking.getType() == CharacterType.NETHER && defending.getType() == CharacterType.OVERWORLD || attacking.getType() == CharacterType.END && defending.getType() == CharacterType.NETHER) {
+            atkModifier = 2;
+        } else {
+            atkModifier = 0.5;
+        }
+        return atkModifier;
+
     }
 
     public void addAction(int player, int cardSlot, BattleAction action) {
@@ -76,25 +93,5 @@ public class Battle {
 
     public Board getBoard() {
         return board;
-    }
-
-    private static int calculateAtk(Character attacking, Character defending) {
-        double modifier = Battle.calculateModifier(attacking, defending);
-
-        return (int) Math.ceil(attacking.getAttack() * modifier);
-    }
-
-    private static double calculateModifier(Character attacking, Character defending) {
-        //Set Attack Modifier; 1 jika tipe sama, 2 jika tipe lawan lebih lemah, 0.5 jika tipe lawan lebih kuat
-        double atkModifier;
-        if (attacking.getType() == defending.getType()) {
-            atkModifier = 1;
-        } else if (attacking.getType() == CharacterType.OVERWORLD && defending.getType() == CharacterType.END || attacking.getType() == CharacterType.NETHER && defending.getType() == CharacterType.OVERWORLD || attacking.getType() == CharacterType.END && defending.getType() == CharacterType.NETHER) {
-            atkModifier = 2;
-        } else {
-            atkModifier = 0.5;
-        }
-        return atkModifier;
-
     }
 }

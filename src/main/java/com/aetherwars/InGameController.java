@@ -4,17 +4,15 @@ package com.aetherwars;
 import com.aetherwars.battle.Battle;
 import com.aetherwars.model.Board;
 import com.aetherwars.model.Card;
+import com.aetherwars.model.Character;
 import com.aetherwars.slot.CardOnField;
 import com.aetherwars.spells.*;
-import com.aetherwars.model.Character;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,10 +29,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class InGameController {
     private Stage stage;
@@ -55,42 +51,78 @@ public class InGameController {
     private int attackerIndex;
     private int defenderIndex;
 
-    @FXML private Label labelTurn;
-    @FXML private Label labelMiddle;
-    @FXML private Rectangle drawPhaseIndicator;
-    @FXML private Rectangle planPhaseIndicator;
-    @FXML private Rectangle attackPhaseIndicator;
-    @FXML private Rectangle endPhaseIndicator;
-    @FXML private Label deckCount;
-    @FXML private Label playerManaCount;
-    @FXML private Label manaCount;
-    @FXML private Rectangle p1Frame;
-    @FXML private Rectangle p2Frame;
-    @FXML private VBox hand1;
-    @FXML private VBox hand2;
-    @FXML private VBox hand3;
-    @FXML private VBox hand4;
-    @FXML private VBox hand5;
-    @FXML private VBox windowBox;
-    @FXML private HBox threeCardsView;
-    @FXML private ImageView hoverCardImage;
-    @FXML private Label hoverCardName;
-    @FXML private Label hoverCardDescription;
-    @FXML private Label hoverCardAtk;
-    @FXML private Label hoverCardHp;
-    @FXML private Label hoverCardLvl;
-    @FXML private Label hoverCardExp;
-    @FXML private Label hoverCardType;
-    @FXML private Pane p1FieldPane;
-    @FXML private Pane p2FieldPane;
-    @FXML private Button addExpButton;
-    @FXML private Button deleteButton;
-    @FXML private Button homeButton;
-    @FXML private Rectangle rectRightHealth;
-    @FXML private Rectangle rectLeftHealth;
-    @FXML private Label p1Health;
-    @FXML private Label p2Health;
-    @FXML private Label winLabel;
+    @FXML
+    private Label labelTurn;
+    @FXML
+    private Label labelMiddle;
+    @FXML
+    private Rectangle drawPhaseIndicator;
+    @FXML
+    private Rectangle planPhaseIndicator;
+    @FXML
+    private Rectangle attackPhaseIndicator;
+    @FXML
+    private Rectangle endPhaseIndicator;
+    @FXML
+    private Label deckCount;
+    @FXML
+    private Label playerManaCount;
+    @FXML
+    private Label manaCount;
+    @FXML
+    private Rectangle p1Frame;
+    @FXML
+    private Rectangle p2Frame;
+    @FXML
+    private VBox hand1;
+    @FXML
+    private VBox hand2;
+    @FXML
+    private VBox hand3;
+    @FXML
+    private VBox hand4;
+    @FXML
+    private VBox hand5;
+    @FXML
+    private VBox windowBox;
+    @FXML
+    private HBox threeCardsView;
+    @FXML
+    private ImageView hoverCardImage;
+    @FXML
+    private Label hoverCardName;
+    @FXML
+    private Label hoverCardDescription;
+    @FXML
+    private Label hoverCardAtk;
+    @FXML
+    private Label hoverCardHp;
+    @FXML
+    private Label hoverCardLvl;
+    @FXML
+    private Label hoverCardExp;
+    @FXML
+    private Label hoverCardType;
+    @FXML
+    private Pane p1FieldPane;
+    @FXML
+    private Pane p2FieldPane;
+    @FXML
+    private Button addExpButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button homeButton;
+    @FXML
+    private Rectangle rectRightHealth;
+    @FXML
+    private Rectangle rectLeftHealth;
+    @FXML
+    private Label p1Health;
+    @FXML
+    private Label p2Health;
+    @FXML
+    private Label winLabel;
 
     public InGameController() {
         Platform.runLater(() -> {
@@ -98,7 +130,7 @@ public class InGameController {
             renderBoard();
             initRender();
             renderThreeCards();
-        } );
+        });
     }
 
     public void setCharacters(List<Character> characters) {
@@ -231,7 +263,7 @@ public class InGameController {
             if (board.getCurrentPlayerHand().get(i) instanceof LevelSpell) {
                 manaCost = new Label("MANA=LVL/2");
             } else {
-                manaCost = new Label("MANA " + Integer.toString(board.getCurrentPlayerHand().get(i).getManaCost()));
+                manaCost = new Label("MANA " + board.getCurrentPlayerHand().get(i).getManaCost());
             }
             manaCost.setFont(new Font("System", 13));
             manaCost.setStyle("-fx-font-weight: bold");
@@ -269,26 +301,26 @@ public class InGameController {
         for (Node child : fieldPane.getChildren()) {
             if (child.getClass().equals(Pane.class)) {
                 Pane pane = (Pane) child;
-                ((ImageView)pane.getChildren().get(2)).setImage(null);
-                ((Label)pane.getChildren().get(1)).setText("");
-                ((Label)pane.getChildren().get(3)).setText("");
-                ((Label)pane.getChildren().get(4)).setText("");
+                ((ImageView) pane.getChildren().get(2)).setImage(null);
+                ((Label) pane.getChildren().get(1)).setText("");
+                ((Label) pane.getChildren().get(3)).setText("");
+                ((Label) pane.getChildren().get(4)).setText("");
             }
         }
     }
 
-    public void renderCardOnField (Pane pane, CardOnField card) {;
-        ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource("card/image/error-icon.png"))));
+    public void renderCardOnField(Pane pane, CardOnField card) {
+        ((ImageView) pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource("card/image/error-icon.png"))));
         try {
-            ((ImageView)pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource(card.getImagePath()))));
+            ((ImageView) pane.getChildren().get(2)).setImage(new Image(String.valueOf(getClass().getResource(card.getImagePath()))));
         } catch (Exception e) {
             System.out.println("Error loading image");
         }
-        ((Label)pane.getChildren().get(1)).setText("HP:" + card.getHealth());
-        ((Label)pane.getChildren().get(3)).setText("ATK:" + card.getAttack());
-        ((Label)pane.getChildren().get(4)).setText(card.getExp() + "/" + card.getCurrentExpReq() + "[" + card.getLevel() + "]");
+        ((Label) pane.getChildren().get(1)).setText("HP:" + card.getHealth());
+        ((Label) pane.getChildren().get(3)).setText("ATK:" + card.getAttack());
+        ((Label) pane.getChildren().get(4)).setText(card.getExp() + "/" + card.getCurrentExpReq() + "[" + card.getLevel() + "]");
         if (!card.getStatus()) {
-            ((Rectangle)pane.getChildren().get(0)).setFill(Color.MAROON);
+            ((Rectangle) pane.getChildren().get(0)).setFill(Color.MAROON);
         } else if (pane.getParent().getId().equals(p1FieldPane.getId())) {
             ((Rectangle) pane.getChildren().get(0)).setFill(Paint.valueOf("#7dc0ff"));
         } else if (pane.getParent().getId().equals(p2FieldPane.getId())) {
@@ -321,7 +353,7 @@ public class InGameController {
             }
             img.setFitHeight(180);
             img.setFitWidth(180);
-            Label manaCost = new Label("MANA " + Integer.toString(threeCards.get(i).getManaCost()));
+            Label manaCost = new Label("MANA " + threeCards.get(i).getManaCost());
             manaCost.setFont(new Font("System", 24));
             manaCost.setStyle("-fx-font-weight: bold");
             manaCost.setTextAlignment(TextAlignment.CENTER);
@@ -461,7 +493,7 @@ public class InGameController {
         for (Node node : p1FieldPane.getChildren()) {
             if (node instanceof Pane) {
                 Pane pane = (Pane) node;
-                if (!((Rectangle)pane.getChildren().get(0)).getFill().equals(Color.MAROON)) {
+                if (!((Rectangle) pane.getChildren().get(0)).getFill().equals(Color.MAROON)) {
                     ((Rectangle) pane.getChildren().get(0)).setFill(Paint.valueOf("#7dc0ff"));
                 }
             }
@@ -469,7 +501,7 @@ public class InGameController {
         for (Node node : p2FieldPane.getChildren()) {
             if (node instanceof Pane) {
                 Pane pane = (Pane) node;
-                if (!((Rectangle)pane.getChildren().get(0)).getFill().equals(Color.MAROON)) {
+                if (!((Rectangle) pane.getChildren().get(0)).getFill().equals(Color.MAROON)) {
                     ((Rectangle) pane.getChildren().get(0)).setFill(Paint.valueOf("#ff8383"));
                 }
             }
@@ -518,7 +550,7 @@ public class InGameController {
                 } else {
                     return;
                 }
-                ((Rectangle)fieldCardPane.getChildren().get(0)).setFill(Color.LIGHTGREEN);
+                ((Rectangle) fieldCardPane.getChildren().get(0)).setFill(Color.LIGHTGREEN);
                 isPlanning = true;
                 planFieldCardIndex = index;
             }
@@ -556,8 +588,15 @@ public class InGameController {
                 board.removeFromCurrentPlayerHand(planHandCardIndex);
             } else if (planHandCard.getCardType().equals("Spell")) {
                 if (board.getCurrentPlayerField().containsKey(index) || board.getCurrentOpponentField().containsKey(index)) {
-                    CardOnField cardOnField = board.getCurrentPlayerField().get(index);
+                    CardOnField cardOnField = null;
                     String playerTarget = "";
+                    if (fieldPane.equals(p1FieldPane)) {
+                        playerTarget = "P1";
+                        cardOnField = board.getPlayerField("P1").get(index);
+                    } else if (fieldPane.equals(p2FieldPane)) {
+                        playerTarget = "P2";
+                        cardOnField = board.getPlayerField("P2").get(index);
+                    }
                     if (planHandCard instanceof LevelSpell) {
                         ((LevelSpell) planHandCard).setManaCost(LevelSpell.getLvlSpellManaCost(cardOnField.getLevel()));
                         if (planHandCard.getManaCost() > board.getCurrentPlayerMana()) {
@@ -566,13 +605,6 @@ public class InGameController {
                             resetHandBackgrounds();
                             return;
                         }
-                    }
-                    if (fieldPane.equals(p1FieldPane)) {
-                        playerTarget = "P1";
-                        cardOnField = board.getPlayerField("P1").get(index);
-                    } else if (fieldPane.equals(p2FieldPane)) {
-                        playerTarget = "P2";
-                        cardOnField = board.getPlayerField("P2").get(index);
                     }
                     if (planHandCard instanceof PotionSpell) {
                         cardOnField.applyPotionSpell((PotionSpell) planHandCard);
@@ -596,8 +628,8 @@ public class InGameController {
 
     public void onAddExpButtonClick() {
         if (board.getPhase().equals("PLAN") && isPlanning && planFieldCard != null && board.getCurrentPlayerMana() > 0) {
-            ((CardOnField)planFieldCard).addExp(1);
-            ((CardOnField)planFieldCard).levelUp();
+            ((CardOnField) planFieldCard).addExp(1);
+            ((CardOnField) planFieldCard).levelUp();
             board.reduceCurrentPlayerMana(1);
             isPlanning = false;
             resetFieldBackgrounds();
@@ -630,7 +662,7 @@ public class InGameController {
                 } else if (fieldPane.equals(p2FieldPane) && board.getWhoseTurn().equals("P1")) {
                     return;
                 }
-                attackerIndex = getFieldCardIndex((Pane)fieldCard) - 2;
+                attackerIndex = getFieldCardIndex((Pane) fieldCard) - 2;
                 if (!board.getCurrentPlayerField().containsKey(attackerIndex)) {
                     return;
                 }
@@ -638,7 +670,7 @@ public class InGameController {
                 if (!attackingCard.getStatus()) {
                     return;
                 }
-                ((Rectangle)((Pane)fieldCard).getChildren().get(0)).setFill(Color.LIGHTGREEN);
+                ((Rectangle) ((Pane) fieldCard).getChildren().get(0)).setFill(Color.LIGHTGREEN);
                 isAttacking = true;
             } else {
                 if (fieldCard instanceof ImageView && board.getCurrentOpponentField().isEmpty()) {
@@ -648,7 +680,7 @@ public class InGameController {
                     resetFieldBackgrounds();
                     renderBoard();
                 } else {
-                    defenderIndex = getOpponentFieldCardIndex((Pane)fieldCard) - 2;
+                    defenderIndex = getOpponentFieldCardIndex((Pane) fieldCard) - 2;
                     if (!board.getCurrentOpponentField().containsKey(defenderIndex)) {
                         return;
                     }
