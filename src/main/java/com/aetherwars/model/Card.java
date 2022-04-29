@@ -5,7 +5,7 @@ public abstract class Card {
     private String name;
     private String description;
     private String image_path;
-    private int manaCost;
+    protected int manaCost;
 
     public Card() {
         this.name = "Steve";

@@ -7,10 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import com.aetherwars.spells.MorphSpell;
-import com.aetherwars.spells.PotionSpell;
-import com.aetherwars.spells.Spell;
-import com.aetherwars.spells.SwapSpell;
+import com.aetherwars.spells.*;
 import com.aetherwars.model.Character;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +25,7 @@ public class AetherWars extends Application {
   private static final String SPELLMORPH_CSV_FILE_PATH = "card/data/spell_morph.csv";
   private static final String SPELLPOTION_CSV_FILE_PATH = "card/data/spell_ptn.csv";
   private static final String SPELLSWAP_CSV_FILE_PATH = "card/data/spell_swap.csv";
+  private static final String SPELLLEVEL_CSV_FILE_PATH = "card/data/spell_level.csv";
   private List<Character> characters;
   private List<Spell> spells;
 
@@ -77,6 +75,17 @@ public class AetherWars extends Application {
       System.out.println(s);
       spells.add(s);
     }
+
+    File spellLevelCSVFile = new File(getClass().getResource(SPELLLEVEL_CSV_FILE_PATH).toURI());
+    CSVReader spellLevelReader = new CSVReader(spellLevelCSVFile, "\t");
+    spellLevelReader.setSkipHeader(true);
+    List<String[]> spellLevelRows = spellLevelReader.read();
+    for (String[] spell : spellLevelRows) {
+      LevelSpell s = new LevelSpell(spell);
+      System.out.println(s);
+      spells.add(s);
+    }
+
     System.out.println("Spells loaded");
   }
 

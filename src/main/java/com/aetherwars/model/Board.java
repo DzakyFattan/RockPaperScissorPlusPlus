@@ -220,9 +220,9 @@ public class Board {
     }
 
     public String checkWinner() {
-        if (P1.getHealth() <= 0 || P1.getDeck().size() <= 0) {
+        if (P1.getHealth() <= 0 || (P1.getDeck().size() <= 0 && Phase == BattlePhase.PLAN)) {
             return "P2";
-        } else if (P2.getHealth() <= 0 || P2.getDeck().size() <= 0) {
+        } else if (P2.getHealth() <= 0 || (P2.getDeck().size() <= 0 && Phase == BattlePhase.PLAN)) {
             return "P1";
         } else {
             return "";

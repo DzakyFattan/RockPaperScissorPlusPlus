@@ -223,11 +223,16 @@ public class InGameController {
             try {
                 img = new ImageView(String.valueOf(getClass().getResource(board.getCurrentPlayerHand().get(i).getImagePath())));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading image: " + board.getCurrentPlayerHand().get(i).getImagePath());
             }
             img.setFitHeight(82);
             img.setFitWidth(82);
-            Label manaCost = new Label("MANA " + Integer.toString(board.getCurrentPlayerHand().get(i).getManaCost()));
+            Label manaCost = null;
+            if (board.getCurrentPlayerHand().get(i) instanceof LevelSpell) {
+                manaCost = new Label("MANA=LVL/2");
+            } else {
+                manaCost = new Label("MANA " + Integer.toString(board.getCurrentPlayerHand().get(i).getManaCost()));
+            }
             manaCost.setFont(new Font("System", 13));
             manaCost.setStyle("-fx-font-weight: bold");
             manaCost.setTextAlignment(TextAlignment.CENTER);
@@ -312,7 +317,7 @@ public class InGameController {
             try {
                 img = new ImageView(String.valueOf(getClass().getResource(threeCards.get(i).getImagePath())));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading image: " + threeCards.get(i).getImagePath());
             }
             img.setFitHeight(180);
             img.setFitWidth(180);
@@ -553,6 +558,17 @@ public class InGameController {
                 if (board.getCurrentPlayerField().containsKey(index) || board.getCurrentOpponentField().containsKey(index)) {
                     CardOnField cardOnField = board.getCurrentPlayerField().get(index);
                     String playerTarget = "";
+                    if (planHandCard instanceof LevelSpell) {
+                        System.out.println(LevelSpell.getLvlSpellManaCost(cardOnField.getLevel()));
+                        ((LevelSpell) planHandCard).setManaCost(LevelSpell.getLvlSpellManaCost(cardOnField.getLevel()));
+                        if (planHandCard.getManaCost() > board.getCurrentPlayerMana()) {
+                            planHandCard = null;
+                            isPlanning = false;
+                            resetHandBackgrounds();
+                            return;
+                        }
+                    }
+                    ((LevelSpell) planHandCard).setManaCost(LevelSpell.getLvlSpellManaCost(cardOnField.getLevel()));
                     if (fieldPane.equals(p1FieldPane)) {
                         playerTarget = "P1";
                         cardOnField = board.getPlayerField("P1").get(index);

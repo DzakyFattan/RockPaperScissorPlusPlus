@@ -10,13 +10,16 @@ public class LevelSpell extends Spell {
     }
 
     public LevelSpell(String[] data) {
-        super(data[1], data[2], data[3], SpellType.LVL, Integer.parseInt(data[5]), Integer.parseInt(data[6]));
+        super(data[1], data[2], data[3], SpellType.LVL, 0, 0);
         this.level_type = LevelSpellType.valueOf(data[4]);
     }
 
     // Setter
     public void setLevelType(LevelSpellType level_type) {
         this.level_type = level_type;
+    }
+    public void setManaCost(int mana) {
+        super.manaCost = mana;
     }
 
     // Getter
@@ -25,7 +28,7 @@ public class LevelSpell extends Spell {
     }
 
     public static int getLvlSpellManaCost(int characterLevel){
-        return (int) Math.ceil(characterLevel/2);
+        return (int) Math.ceil((double) characterLevel/2.0);
     }
 
     @Override

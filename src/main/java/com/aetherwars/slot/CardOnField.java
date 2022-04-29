@@ -4,7 +4,7 @@ import com.aetherwars.model.Character;
 import com.aetherwars.spells.*;
 import java.util.*;
 
-public class CardOnField extends Character{
+public class CardOnField extends Character {
     private int level;
     private int exp;
     private boolean canAttack;
@@ -73,6 +73,8 @@ public class CardOnField extends Character{
 
         // removes the potion if it has no effect
         activePots.removeIf(potion -> potion.getHealthChange() == 0 && potion.getAttackChange() == 0);
+
+        swapEffect.tick();
     }
 
     public boolean getStatus() {
