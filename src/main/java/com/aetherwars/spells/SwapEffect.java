@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import com.aetherwars.slot.CardOnField;
 
-public class SwapEffect {
+public class SwapEffect implements TemporarySpell{
     private int durationLeft;
     private boolean isPermanent;
 

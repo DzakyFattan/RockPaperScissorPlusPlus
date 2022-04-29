@@ -209,11 +209,11 @@ public class Board {
 
     public void tickAllSpells() {
         if (whoseTurn.equals("P2")) {
-            for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P1").entrySet()) {
+            for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P2").entrySet()) {
                 entry.getValue().tick();
             }
         } else {
-            for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P2").entrySet()) {
+            for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P1").entrySet()) {
                 entry.getValue().tick();
             }
         }

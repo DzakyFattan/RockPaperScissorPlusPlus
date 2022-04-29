@@ -75,7 +75,14 @@ public class CardOnField extends Character {
         // removes the potion if it has no effect
         activePots.removeIf(potion -> potion.getHealthChange() == 0 && potion.getAttackChange() == 0);
 
+        boolean wasActive = swapEffect.isActive();
         swapEffect.tick();
+        if(wasActive && !swapEffect.isActive()){
+            // swaps stats
+            int tempAttack = super.getAttack();
+            super.setAttack(super.getHealth());
+            super.setHealth(tempAttack);
+        }
     }
 
     public boolean getStatus() {
