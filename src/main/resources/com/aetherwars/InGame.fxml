@@ -71,33 +71,33 @@
                         <Pane layoutX="149.0" layoutY="28.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7dc0ff" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="49.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="18.0" layoutY="82.0" prefHeight="17.0" prefWidth="62.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="260.0" layoutY="28.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7dc0ff" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="51.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="15.0" layoutY="82.0" prefHeight="17.0" prefWidth="72.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="149.0" layoutY="138.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7dc0ff" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
@@ -110,20 +110,20 @@
                         <Pane layoutX="260.0" layoutY="138.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7dc0ff" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="51.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="13.0" layoutY="82.0" prefHeight="17.0" prefWidth="72.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="370.0" layoutY="86.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7dc0ff" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
@@ -151,65 +151,65 @@
                         <Pane layoutX="290.0" layoutY="28.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle fx:id="p2Frame1" arcHeight="5.0" arcWidth="5.0" fill="#ff8383" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="40.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="57.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="13.0" layoutY="82.0" prefHeight="17.0" prefWidth="72.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="180.0" layoutY="28.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle fx:id="p2Frame11" arcHeight="5.0" arcWidth="5.0" fill="#ff8383" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="57.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="14.0" layoutY="82.0" prefHeight="17.0" prefWidth="72.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="290.0" layoutY="138.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle fx:id="p2Frame111" arcHeight="5.0" arcWidth="5.0" fill="#ff8383" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="57.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="13.0" layoutY="82.0" prefHeight="17.0" prefWidth="72.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="180.0" layoutY="138.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle fx:id="p2Frame1111" arcHeight="5.0" arcWidth="5.0" fill="#ff8383" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="51.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="15.0" layoutY="82.0" prefHeight="17.0" prefWidth="72.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="70.0" layoutY="83.0" onMouseClicked="#onFieldCardClicked" onMouseEntered="#renderHoveredCardField" onMouseExited="#unrenderHoveredCard" prefHeight="104.0" prefWidth="100.0">
                            <children>
                               <Rectangle fx:id="p2Frame11111" arcHeight="5.0" arcWidth="5.0" fill="#ff8383" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="35.0" text="HP:1" />
+                              <Label layoutX="61.0" layoutY="6.0" prefHeight="17.0" prefWidth="40.0" text="HP:1" />
                               <ImageView fitHeight="58.0" fitWidth="57.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@card/image/character/Sheep.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="44.0" text="ATK:1" />
+                              <Label layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="57.0" text="ATK:1" />
                               <Label alignment="CENTER" layoutX="15.0" layoutY="82.0" prefHeight="17.0" prefWidth="72.0" text="0/1 [1]" textAlignment="CENTER" />
                            </children>
                         </Pane>
