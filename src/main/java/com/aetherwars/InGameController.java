@@ -559,7 +559,6 @@ public class InGameController {
                     CardOnField cardOnField = board.getCurrentPlayerField().get(index);
                     String playerTarget = "";
                     if (planHandCard instanceof LevelSpell) {
-                        System.out.println(LevelSpell.getLvlSpellManaCost(cardOnField.getLevel()));
                         ((LevelSpell) planHandCard).setManaCost(LevelSpell.getLvlSpellManaCost(cardOnField.getLevel()));
                         if (planHandCard.getManaCost() > board.getCurrentPlayerMana()) {
                             planHandCard = null;
@@ -568,7 +567,6 @@ public class InGameController {
                             return;
                         }
                     }
-                    ((LevelSpell) planHandCard).setManaCost(LevelSpell.getLvlSpellManaCost(cardOnField.getLevel()));
                     if (fieldPane.equals(p1FieldPane)) {
                         playerTarget = "P1";
                         cardOnField = board.getPlayerField("P1").get(index);
