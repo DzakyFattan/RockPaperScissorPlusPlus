@@ -7,6 +7,7 @@ import java.util.*;
 public class CardOnField extends Character{
     private int level;
     private int exp;
+    private boolean canAttack;
     private List<PotionSpell> activePots;
     private SwapEffect swapEffect;
 
@@ -22,6 +23,7 @@ public class CardOnField extends Character{
         super(character);
         this.level = 1;
         this.exp = 0;
+        this.canAttack = true;
         this.activePots = new ArrayList<PotionSpell>();
         this.swapEffect = new SwapEffect(-1);           // -1 means no effect
     }
@@ -66,6 +68,14 @@ public class CardOnField extends Character{
 
         // removes the potion if it has no effect
         activePots.removeIf(potion -> potion.getHealthChange() == 0 && potion.getAttackChange() == 0);
+    }
+
+    public boolean getStatus() {
+        return canAttack;
+    }
+
+    public void setStatus(boolean status) {
+        this.canAttack = status;
     }
 
     public int getAttackBuff(){

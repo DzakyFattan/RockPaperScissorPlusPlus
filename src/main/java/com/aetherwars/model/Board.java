@@ -48,6 +48,7 @@ public class Board {
                 break;
             case ATTACK:
                 Phase = BattlePhase.END;
+                resetFieldStatus();
                 break;
             case END:
                 Phase = BattlePhase.DRAW;
@@ -194,6 +195,11 @@ public class Board {
         else
             P2.reduceHealth(amount);
     }
+
+    public void resetFieldStatus() {
+        for (CardOnField card : P1.getField().values()) { card.setStatus(true); }
+        for (CardOnField card : P2.getField().values()) { card.setStatus(true); }
+    }
     // Bagian Battle
 
     // Bagian prep potion
@@ -210,6 +216,16 @@ public class Board {
             for (Map.Entry<Integer, CardOnField> entry : getPlayerField("P2").entrySet()) {
                 entry.getValue().tick();
             }
+        }
+    }
+
+    public String checkWinner() {
+        if (P1.getHealth() <= 0 || P1.getDeck().size() <= 0) {
+            return "P2";
+        } else if (P2.getHealth() <= 0 || P2.getDeck().size() <= 0) {
+            return "P1";
+        } else {
+            return "";
         }
     }
 }

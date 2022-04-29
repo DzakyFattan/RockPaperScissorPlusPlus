@@ -407,5 +407,11 @@
             </VBox>
          </children>
       </HBox>
+      <Label fx:id="winLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="394.0" layoutY="260.0" onMouseClicked="#switchToMain" text="Steve Wins!" visible="false">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+      <Button fx:id="homeButton" layoutX="615.0" layoutY="417.0" mnemonicParsing="false" onAction="#switchToMain" text="Home" visible="false" />
    </children>
 </AnchorPane>

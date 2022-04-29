@@ -1,6 +1,7 @@
 package com.aetherwars;
 
 
+import com.aetherwars.battle.Battle;
 import com.aetherwars.model.Board;
 import com.aetherwars.model.Card;
 import com.aetherwars.slot.CardOnField;
@@ -84,10 +85,12 @@ public class InGameController {
     @FXML private Pane p2FieldPane;
     @FXML private Button addExpButton;
     @FXML private Button deleteButton;
+    @FXML private Button homeButton;
     @FXML private Rectangle rectRightHealth;
     @FXML private Rectangle rectLeftHealth;
     @FXML private Label p1Health;
     @FXML private Label p2Health;
+    @FXML private Label winLabel;
 
     public InGameController() {
         Platform.runLater(() -> {
@@ -193,6 +196,19 @@ public class InGameController {
         }
         renderCardsInHand();
         renderField();
+        if (board.checkWinner().equals("P1")) {
+            winLabel.setVisible(true);
+            winLabel.setText("Steve Wins!");
+            homeButton.setVisible(true);
+            windowBox.setOpacity(0.1);
+            windowBox.setDisable(true);
+        } else if (board.checkWinner().equals("P2")) {
+            winLabel.setVisible(true);
+            winLabel.setText("Alex Wins!");
+            homeButton.setVisible(true);
+            windowBox.setOpacity(0.1);
+            windowBox.setDisable(true);
+        }
     }
 
     public void renderCardsInHand() {
@@ -266,6 +282,13 @@ public class InGameController {
         ((Label)pane.getChildren().get(1)).setText("HP:" + card.getHealth());
         ((Label)pane.getChildren().get(3)).setText("ATK:" + card.getAttack());
         ((Label)pane.getChildren().get(4)).setText(card.getExp() + "/" + card.getCurrentExpReq() + "[" + card.getLevel() + "]");
+        if (!card.getStatus()) {
+            ((Rectangle)pane.getChildren().get(0)).setFill(Color.MAROON);
+        } else if (pane.getParent().getId().equals(p1FieldPane.getId())) {
+            ((Rectangle) pane.getChildren().get(0)).setFill(Paint.valueOf("#7dc0ff"));
+        } else if (pane.getParent().getId().equals(p2FieldPane.getId())) {
+            ((Rectangle) pane.getChildren().get(0)).setFill(Paint.valueOf("#ff8383"));
+        }
     }
 
     public void renderField() {
@@ -284,7 +307,7 @@ public class InGameController {
         threeCardsView.setVisible(true);
         windowBox.setOpacity(0.2);
         threeCards = board.getCurrentPlayerTopDeck();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < threeCards.size(); i++) {
             ImageView img = new ImageView(String.valueOf(getClass().getResource("card/image/error-icon.png")));
             try {
                 img = new ImageView(String.valueOf(getClass().getResource(threeCards.get(i).getImagePath())));
@@ -433,13 +456,17 @@ public class InGameController {
         for (Node node : p1FieldPane.getChildren()) {
             if (node instanceof Pane) {
                 Pane pane = (Pane) node;
-                ((Rectangle)pane.getChildren().get(0)).setFill(Paint.valueOf("#7dc0ff"));
+                if (!((Rectangle)pane.getChildren().get(0)).getFill().equals(Color.MAROON)) {
+                    ((Rectangle) pane.getChildren().get(0)).setFill(Paint.valueOf("#7dc0ff"));
+                }
             }
         }
         for (Node node : p2FieldPane.getChildren()) {
             if (node instanceof Pane) {
                 Pane pane = (Pane) node;
-                ((Rectangle)pane.getChildren().get(0)).setFill(Paint.valueOf("#ff8383"));
+                if (!((Rectangle)pane.getChildren().get(0)).getFill().equals(Color.MAROON)) {
+                    ((Rectangle) pane.getChildren().get(0)).setFill(Paint.valueOf("#ff8383"));
+                }
             }
         }
         isPlanning = false;
@@ -451,9 +478,12 @@ public class InGameController {
     }
 
     public void onFieldCardClicked(Event e) {
-        handlePlanning(e);
-        placePlannedCardOnField(e);
-        handleBattle(e);
+        if (board.getPhase().equals("PLAN")) {
+            handlePlanning(e);
+            placePlannedCardOnField(e);
+        } else if (board.getPhase().equals("ATTACK")) {
+            handleBattle(e);
+        }
     }
 
     public void handlePlanning(Event e) {
@@ -591,12 +621,16 @@ public class InGameController {
                     return;
                 }
                 attackingCard = board.getCurrentPlayerField().get(attackerIndex);
+                if (!attackingCard.getStatus()) {
+                    return;
+                }
                 ((Rectangle)((Pane)fieldCard).getChildren().get(0)).setFill(Color.LIGHTGREEN);
                 isAttacking = true;
             } else {
                 if (fieldCard instanceof ImageView && board.getCurrentOpponentField().isEmpty()) {
                     board.reduceCurrentOpponentHealth(attackingCard.getAttack());
                     isAttacking = false;
+                    attackingCard.setStatus(false);
                     resetFieldBackgrounds();
                     renderBoard();
                 } else {
@@ -605,7 +639,16 @@ public class InGameController {
                         return;
                     }
                     defendingCard = board.getCurrentOpponentField().get(defenderIndex);
+                    Battle battle = new Battle(board);
+                    battle.characterAttacked(attackerIndex, defenderIndex);
+                    battle.runCachedActions();
+                    if (!board.getCurrentOpponentField().containsKey(defenderIndex)) {
+                        attackingCard.addExp(defendingCard.getLevel());
+                        attackingCard.levelUp();
+                    }
+                    attackingCard.setStatus(false);
                     isAttacking = false;
+                    board.checkForDeathsOnField();
                     resetFieldBackgrounds();
                     renderBoard();
                     //TODO: add battle

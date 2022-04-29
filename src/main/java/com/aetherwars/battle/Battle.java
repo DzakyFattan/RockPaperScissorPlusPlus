@@ -62,13 +62,15 @@ public class Battle {
         }
     }
 
-    public void characterAttacked(int player, int attackingCardSlot, int defendingCardSlot) {
+    public void characterAttacked(int attackingCardSlot, int defendingCardSlot) {
         Map<Integer, CardOnField> P1Field = this.board.getP1().getField();
         Map<Integer, CardOnField> P2Field = this.board.getP2().getField();
-        if (player == 1) {
+        if (board.getWhoseTurn().equals("P1")) {
             this.P1Actions.put(attackingCardSlot, new BattleAction(Battle.calculateAtk(P1Field.get(attackingCardSlot), P2Field.get(defendingCardSlot)), defendingCardSlot));
+            this.P2Actions.put(defendingCardSlot, new BattleAction(Battle.calculateAtk(P2Field.get(defendingCardSlot), P1Field.get(attackingCardSlot)), attackingCardSlot));
         } else {
             this.P2Actions.put(attackingCardSlot, new BattleAction(Battle.calculateAtk(P2Field.get(attackingCardSlot), P1Field.get(defendingCardSlot)), defendingCardSlot));
+            this.P1Actions.put(defendingCardSlot, new BattleAction(Battle.calculateAtk(P1Field.get(defendingCardSlot), P2Field.get(attackingCardSlot)), attackingCardSlot));
         }
     }
 
