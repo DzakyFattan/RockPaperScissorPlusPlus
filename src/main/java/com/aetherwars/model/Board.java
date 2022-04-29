@@ -17,7 +17,6 @@ public class Board {
     private Player P1;
     private Player P2;
 
-    private List<SwapEffect> swapEffects;
     private List<Character> characters;
     private int turnCounter;
     private String whoseTurn;
@@ -31,7 +30,6 @@ public class Board {
         manaCounter = 1;
         turnCounter = 1;
         whoseTurn = "P1";
-        swapEffects = new ArrayList<SwapEffect>();
     }
 
     public String getPhase() {

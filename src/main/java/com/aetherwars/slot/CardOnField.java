@@ -48,15 +48,17 @@ public class CardOnField extends Character {
         this.exp = 0;
     }
 
+    private void swapStats(){
+        int tempAttack = super.getAttack();
+        super.setAttack(super.getHealth());
+        super.setHealth(tempAttack);
+    }
+
     public void applySwapSpell(SwapSpell swapSpell) {
         if(!swapEffect.isActive()){
             SwapEffect newSwapEffect = new SwapEffect(swapSpell.getDuration());
             this.swapEffect = newSwapEffect;
-
-            // swaps stats
-            int tempAttack = super.getAttack();
-            super.setAttack(super.getHealth());
-            super.setHealth(tempAttack);
+            this.swapStats();
         } else {
             swapEffect.addDuration(swapSpell.getDuration());
         }
@@ -75,13 +77,11 @@ public class CardOnField extends Character {
         // removes the potion if it has no effect
         activePots.removeIf(potion -> potion.getHealthChange() == 0 && potion.getAttackChange() == 0);
 
+        // removes the potion if it has no effect
         boolean wasActive = swapEffect.isActive();
         swapEffect.tick();
         if(wasActive && !swapEffect.isActive()){
-            // swaps stats
-            int tempAttack = super.getAttack();
-            super.setAttack(super.getHealth());
-            super.setHealth(tempAttack);
+            this.swapStats();
         }
     }
 
