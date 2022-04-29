@@ -35,8 +35,9 @@ public class MainMenuController {
         controller.setCharacters(characters);
         controller.setSpells(spells);
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

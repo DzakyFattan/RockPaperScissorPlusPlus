@@ -96,16 +96,13 @@ public class AetherWars extends Application {
     controller.setCharacters(characters);
     controller.setSpells(spells);
 
-    Scene mainMenuScene = new Scene(mainMenu);
+    Scene mainMenuScene = new Scene(mainMenu, 1280, 720);
     mainMenuScene.getStylesheets().add(css);
 
     primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/aetherwars/icon.png"))));
     primaryStage.setTitle("Minecraft: Aether Wars");
 
-    primaryStage.setMinWidth(960);
-    primaryStage.setMinHeight(540);
-    primaryStage.setMaxWidth(1920);
-    primaryStage.setMaxHeight(1080);
+    primaryStage.setResizable(false);
     primaryStage.setScene(mainMenuScene);
     primaryStage.show();
 
