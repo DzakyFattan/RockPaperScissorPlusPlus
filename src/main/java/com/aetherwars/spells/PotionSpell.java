@@ -58,6 +58,12 @@ public class PotionSpell extends Spell implements TemporarySpell {
         this.health_change = health_change;
     }
 
+    public void swapStats(){
+        int prev_attack = this.attack_change;
+        this.attack_change = this.health_change;
+        this.health_change = prev_attack;
+    }
+
     @Override
     public String toSpecString() {
         return "ATK" + (this.attack_change >= 0 ? "+" : "") + this.attack_change + "/HP" + (this.health_change >= 0 ? "+" : "") + this.health_change;

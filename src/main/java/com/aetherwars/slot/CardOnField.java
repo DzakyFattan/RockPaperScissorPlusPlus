@@ -53,6 +53,9 @@ public class CardOnField extends Character {
         int tempAttack = super.getAttack();
         super.setAttack(super.getHealth());
         super.setHealth(tempAttack);
+        for(PotionSpell potion : activePots) {
+            potion.swapStats();
+        }
     }
 
     public void applySwapSpell(SwapSpell swapSpell) {
