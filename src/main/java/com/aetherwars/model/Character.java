@@ -97,6 +97,11 @@ public class Character extends Card{
     this.health += this.healthUp;
   }
 
+  public void levelDown() {
+    this.attack -= this.attackUp;
+    this.health -= this.healthUp;
+  }
+
   @Override
   public String getCardType() {
     return "Character";

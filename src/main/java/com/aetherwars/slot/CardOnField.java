@@ -42,6 +42,7 @@ public class CardOnField extends Character{
         else {
             if (this.level > 1) {
                 this.level--;
+                super.levelDown();
             }
         }
         this.exp = 0;
