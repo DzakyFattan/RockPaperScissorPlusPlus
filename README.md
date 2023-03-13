@@ -4,7 +4,7 @@
   <br>
   <a><img src="https://media.discordapp.net/attachments/893484082275708980/969594967880241152/icon.png" width="200"></a>
   <br>
- DNA At Work
+ RockPaperScissors++
   <br>
 </h1>
 
